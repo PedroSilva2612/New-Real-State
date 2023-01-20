@@ -1,0 +1,69 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+
+.header{
+    position: relative;
+    height: 100vh;
+
+    &::before{
+        content: '';
+        background-image: url(../../../../build/img/img1.jpg);
+        background-size: cover;
+        background-position: center;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        opacity: 0.7;
+    }
+
+    &__box{
+        position: relative;
+        margin-top: 20rem;
+    }
+
+    &__title{
+        font-size: 4.2rem;
+
+        span{
+            color: v.$primario;
+        }
+    }
+
+    &__parragraph{
+    }
+
+    &__buttons{
+        display: flex;
+        gap: 2rem;
+    }
+
+    &__cta{
+        text-decoration: none;
+        padding: 1.5rem 5rem;
+        border-radius: .5rem;
+        color: v.$blanco;
+        background-color: v.$primario;
+        transition: background-color;
+        transition-duration: .3s;
+
+        &--buy{
+            &:hover{
+                background-color: #0955c0;
+            }
+        }
+
+        &--sell{
+            background-color: v.$gris;
+            color: v.$negro;
+            transition-property: background-color;
+            transition-duration: .3s;
+
+            &:hover{
+                background-color: rgb(220, 220, 220);
+            }
+        }
+    }
+}
