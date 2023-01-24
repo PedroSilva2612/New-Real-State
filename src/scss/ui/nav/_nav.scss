@@ -1,34 +1,35 @@
-@use 'base/variables' as v;
+@use 'base/variables'as v;
+@use 'base/mixins'as m;
 
-.nav{
+.nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 2rem;
+    padding: 2rem 1rem 0 1rem;
     position: relative;
 
-    &__links{
+    &__links {
         display: flex;
         gap: 2rem;
         align-items: center;
     }
 
-    &__link{
+    &__link {
         text-decoration: none;
         color: v.$negro;
 
-        &--bold{
+        &--bold {
             font-weight: bold;
         }
 
-        &--button{
+        &--button {
             background-color: v.$negro;
             color: v.$blanco;
             padding: 2rem;
             transition-property: background-color;
             transition-duration: .3s;
 
-            &:hover{
+            &:hover {
                 background-color: #212121;
             }
         }

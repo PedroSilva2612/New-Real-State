@@ -25,14 +25,12 @@
     }
 
     &__title{
+        max-width: 40rem;
         font-size: 4.2rem;
 
         span{
             color: v.$primario;
         }
-    }
-
-    &__parragraph{
     }
 
     &__buttons{
