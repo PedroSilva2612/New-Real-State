@@ -2,36 +2,46 @@
 @use 'base/mixins'as m;
 
 .nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2rem 1rem 0 1rem;
+    width: 100%;
+    height: 8rem;
+    background-color: v.$blanco;
+    padding: 0 2rem;
     position: relative;
 
-    &__links {
-        display: flex;
-        gap: 2rem;
-        align-items: center;
+    @include m.desktop {
+        padding: 0 4rem;
+    }
+
+    &__contenedor {
+
+    }
+
+    &__bar {
+
+    }
+
+    &__hamburguer {
+        font-size: 4.5rem;
+        cursor: pointer;
+
+        @include m.desktop {
+            display: none;
+        }
     }
 
     &__link {
-        text-decoration: none;
-        color: v.$negro;
+        
 
-        &--bold {
-            font-weight: bold;
+        &.active {
+            color: v.$blanco;
+            background-color: v.$primario;
         }
 
-        &--button {
-            background-color: v.$negro;
+        &:hover {
             color: v.$blanco;
-            padding: 2rem;
-            transition-property: background-color;
-            transition-duration: .3s;
-
-            &:hover {
-                background-color: #212121;
-            }
+            background-color: v.$primario;
         }
     }
+
+
 }
