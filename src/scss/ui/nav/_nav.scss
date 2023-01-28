@@ -1,37 +1,128 @@
 @use 'base/variables'as v;
 @use 'base/mixins'as m;
 
-.nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2rem 1rem 0 1rem;
+.nav{
+    height: 7rem;
+    overflow: hidden;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 100;
 
-    &__links {
-        display: flex;
-        gap: 2rem;
-        align-items: center;
+    @include m.desktop { 
+        overflow: visible;
+        padding: 5rem 0 0;
     }
 
-    &__link {
+    &__hamburguer{
+        width: 3rem;
+        height: 50%;
+        background-image: url(../../../../build/img/menu-right.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        cursor: pointer;
+
+        z-index: 100;
+        transition: background-image .3s;
+
+        @include m.desktop { 
+            display: none;
+        }
+
+        &--open{
+            background-image: url(../../../../build/img/bx-x.svg);
+        }
+    }
+    
+
+    &__overlay{
+        background-color: #000000a7;
+        position: fixed;
+        inset: 0;
+        opacity: 0;
+        pointer-events: none;
+        transition: .3s opacity;
+
+        @include m.desktop { 
+            position: unset;
+            background-color: transparent;
+            opacity: 1;
+            pointer-events: unset;
+        }
+    }
+
+    &__overlay--show{
+        opacity: 1;
+        pointer-events: unset;
+    }
+
+    &__menu{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        width: 65%;
+        background-color: v.$blanco;
+        max-width: 40rem;
+        padding: 7rem 0;
+        list-style: none;
+        overflow: auto;
+
+        @include m.desktop { 
+            position: unset;
+            width: 100%;
+            max-width: unset;
+            background-color: unset;
+            padding: 0;
+            overflow: unset;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+    }
+
+    &__item{
+        width: 80%;
+        margin: 0 auto;
+        color: v.$negro;
+        cursor: pointer;
+        padding: 2rem 0;
+
+        @include m.desktop { 
+            width: max-content;
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    &__link{
+        text-align: center;
+        display: block;
+        margin-bottom: 3rem;
         text-decoration: none;
         color: v.$negro;
 
-        &--bold {
-            font-weight: bold;
-        }
-
-        &--button {
+        &--btn{
             background-color: v.$negro;
             color: v.$blanco;
-            padding: 2rem;
-            transition-property: background-color;
-            transition-duration: .3s;
+            padding: 2rem 2rem;
+            transition: .3s opacity;
 
-            &:hover {
-                background-color: #212121;
+            &:hover{
+                opacity: .8;
             }
+        }
+
+
+        @include m.desktop { 
+            display: inline-block;
+            margin-bottom: 0;
+
+            &--bold{
+                font-weight: 700;
+            }
+
         }
     }
 }

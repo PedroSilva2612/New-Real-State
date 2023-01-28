@@ -1,0 +1,56 @@
+@use 'base/variables'as v;
+@use 'base/mixins'as m;
+
+.section1 {
+
+
+    &__title {
+        text-align: center;
+        font-size: 3.2rem;
+        margin-top: 4rem;
+
+        @include m.desktop { 
+            font-size: 4.6rem;
+        }
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        align-items: center;
+
+        @include m.desktop { 
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+    }
+
+}
+
+.card {
+    background-color: v.$blanco;
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 3rem 2rem;
+    min-height: 35rem;
+
+    &__img{
+        margin: 0 auto;
+        margin-top: 2rem;
+        width: 8rem;
+    }
+
+    &__title{
+        font-size: 2.5rem;
+        margin-top: .8rem;
+    }
+
+    &__parragraph{
+        margin-bottom: 3rem;
+    }
+
+    &__cta{
+        text-decoration: none;
+        color: v.$primario;
+    }
+}
