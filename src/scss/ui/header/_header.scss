@@ -1,10 +1,13 @@
 @use 'base/variables' as v;
 @use 'base/mixins' as m;
 
+.body{
+    background-color: v.$gris;
+}
 
 .header{
-    position: relative;
     height: 100vh;
+    // position: relative;
 
     &::before{
         content: '';
@@ -22,6 +25,10 @@
     &__box{
         position: relative;
         margin-top: 20rem;
+
+        @include m.desktopXL { 
+            margin-top: 30rem;
+        }
     }
 
     &__title{
@@ -30,6 +37,28 @@
 
         span{
             color: v.$primario;
+        }
+
+        @include m.tablet { 
+            font-size: 6.2rem;
+            max-width: 60rem;
+        }
+
+        @include m.desktopXL { 
+            font-size: 8rem;
+            max-width: 80rem;
+        }
+    }
+
+    &__parragraph{
+        line-height: 1.5;
+
+        @include m.tablet { 
+            max-width: 40rem;       
+        }
+
+        @include m.desktop { 
+            max-width: 60rem;
         }
     }
 

@@ -1,47 +1,128 @@
 @use 'base/variables'as v;
 @use 'base/mixins'as m;
 
-.nav {
-    width: 100%;
-    height: 8rem;
-    background-color: v.$blanco;
-    padding: 0 2rem;
+.nav{
+    height: 7rem;
+    overflow: hidden;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 100;
 
-    @include m.desktop {
-        padding: 0 4rem;
+    @include m.desktop { 
+        overflow: visible;
+        padding: 5rem 0 0;
     }
 
-    &__contenedor {
-
-    }
-
-    &__bar {
-
-    }
-
-    &__hamburguer {
-        font-size: 4.5rem;
+    &__hamburguer{
+        width: 3rem;
+        height: 50%;
+        background-image: url(../../../../build/img/menu-right.png);
+        background-repeat: no-repeat;
+        background-position: center;
         cursor: pointer;
 
-        @include m.desktop {
+        z-index: 100;
+        transition: background-image .3s;
+
+        @include m.desktop { 
             display: none;
         }
-    }
 
-    &__link {
-        
-
-        &.active {
-            color: v.$blanco;
-            background-color: v.$primario;
-        }
-
-        &:hover {
-            color: v.$blanco;
-            background-color: v.$primario;
+        &--open{
+            background-image: url(../../../../build/img/bx-x.svg);
         }
     }
+    
+
+    &__overlay{
+        background-color: #000000a7;
+        position: fixed;
+        inset: 0;
+        opacity: 0;
+        pointer-events: none;
+        transition: .3s opacity;
+
+        @include m.desktop { 
+            position: unset;
+            background-color: transparent;
+            opacity: 1;
+            pointer-events: unset;
+        }
+    }
+
+    &__overlay--show{
+        opacity: 1;
+        pointer-events: unset;
+    }
+
+    &__menu{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        width: 65%;
+        background-color: v.$blanco;
+        max-width: 40rem;
+        padding: 7rem 0;
+        list-style: none;
+        overflow: auto;
+
+        @include m.desktop { 
+            position: unset;
+            width: 100%;
+            max-width: unset;
+            background-color: unset;
+            padding: 0;
+            overflow: unset;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+    }
+
+    &__item{
+        width: 80%;
+        margin: 0 auto;
+        color: v.$negro;
+        cursor: pointer;
+        padding: 2rem 0;
+
+        @include m.desktop { 
+            width: max-content;
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    &__link{
+        text-align: center;
+        display: block;
+        margin-bottom: 3rem;
+        text-decoration: none;
+        color: v.$negro;
+
+        &--btn{
+            background-color: v.$negro;
+            color: v.$blanco;
+            padding: 2rem 2rem;
+            transition: .3s opacity;
+
+            &:hover{
+                opacity: .8;
+            }
+        }
 
 
+        @include m.desktop { 
+            display: inline-block;
+            margin-bottom: 0;
+
+            &--bold{
+                font-weight: 700;
+            }
+
+        }
+    }
 }
