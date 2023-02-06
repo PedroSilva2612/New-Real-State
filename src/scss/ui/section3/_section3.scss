@@ -1,0 +1,127 @@
+@use 'base/variables'as v;
+@use 'base/mixins'as m;
+
+.section3 {
+
+    margin-top: 8rem;
+
+
+    &__top {
+        @include m.desktop {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8rem;
+        }
+    }
+
+
+    &__title {
+        font-size: 3.2rem;
+
+        @include m.tablet {
+            text-align: center;
+        }
+
+        @include m.desktop { 
+            margin: 0;
+            font-size: 3.8rem;
+        }
+    }
+
+    &__buttons {
+        margin-bottom: 5rem;
+
+        @include m.tablet {
+            text-align: center;
+        }
+
+        @include m.desktop { 
+            margin-bottom: 0;
+        }
+    }
+
+    &__cta {
+        text-decoration: none;
+        color: v.$negro;
+        background-color: v.$blanco;
+        padding: 1rem 3rem;
+        margin-right: 1rem;
+        transition: .3s opacity;
+
+        &:hover {
+            opacity: .8;
+        }
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        &--black {
+            background-color: v.$negro;
+            color: v.$blanco;
+        }
+    }
+
+    &__grid{
+        @include m.desktop { 
+            @include m.grid(3, 2rem)
+        }
+    }
+
+    &__box{
+        margin-bottom: 3rem;
+    }
+
+    &__imgbox{
+        position: relative;
+    }
+
+    &__img{
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    &__subtitles{
+        font-size: 2rem;
+        margin-top: 1rem;
+        margin-bottom: .2rem;
+        position: relative;
+        padding-left: 2rem;
+
+        &::before{
+            content: '';
+            position: absolute;
+            background-image: url(../../../../build/img/location.svg);
+            background-repeat: no-repeat;
+            // background-position: center;
+            height: 3rem;
+            width: 3rem;
+            left: -0.1rem;
+        }
+
+    }
+
+    &__parragraphs{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__parragraph{
+        margin-top: 0.2rem;
+    }
+
+    &__corazon{
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        width: 2.5rem;
+    }
+
+    &__link{
+        text-decoration: none;
+        color: v.$primario;
+    }
+
+}
