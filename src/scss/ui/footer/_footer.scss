@@ -50,6 +50,7 @@
         padding: 2rem;
         border-style: none;
         margin: 0 auto;
+        overflow: hidden;
 
         @include m.tablet { 
             display: inline-block;
