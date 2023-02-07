@@ -1,9 +1,12 @@
 @use 'base/variables' as v;
 @use 'base/mixins' as m;
 
+:root{
+    scroll-behavior: smooth;
+}
+
 .body{
     background-color: v.$gris;
-    scroll-behavior: smooth;
 }
 
 .header{

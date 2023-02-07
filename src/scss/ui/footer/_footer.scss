@@ -1,0 +1,100 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.footer{
+
+    margin-top: 8rem;
+    background-color: v.$blanco;
+    padding: 1.5rem;
+
+    @include m.desktop { 
+        padding: 6rem;
+    }
+
+    &__title{
+        font-size: 2.8rem;
+        text-align: center;
+
+        @include m.tablet { 
+            font-size: 3.2rem;
+            margin-bottom: 0;
+        }
+
+        @include m.desktop { 
+            margin-top: 0;
+            font-size: 3.6rem;
+        }
+    }
+
+    &__parragraph{
+        text-align: center;
+        line-height: 1.5;
+        color: v.$grisOscuro;
+    }
+
+    &__box{
+        border: 1px solid v.$grisOscuro;
+
+        @include m.tablet { 
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 5rem;
+            padding: 1rem 2rem;
+        }
+    }
+
+    &__input{
+        display: block;
+        padding: 2rem;
+        border-style: none;
+        margin: 0 auto;
+
+        @include m.tablet { 
+            display: inline-block;
+            width: 100%;
+        }
+    }
+
+    &__cta{
+        color: v.$blanco;
+        background-color: v.$primario;
+        text-decoration: none;
+        border-style: none;
+        padding: 1.2rem 1rem 1.2rem 3rem;
+        position: relative;
+        cursor: pointer;
+        text-align: center;
+        transition: .3s background-color;
+        
+
+        &::before{
+            content: '';
+            position: absolute;
+            background-image: url(../../../../build/img/search.svg);
+            background-repeat: no-repeat;
+            width: 2rem;
+            height: 2rem;
+            margin-left: -2.5rem;
+        }
+
+        &:hover{
+            background-color: #207CFF;
+        }
+
+        @include m.tablet { 
+        padding: 2rem 3rem 2rem 5rem;
+            
+        }
+    }
+
+    &__buttonbox{
+        text-align: center;
+        margin-bottom: 2rem;
+
+        @include m.tablet { 
+            margin-bottom: 0;
+        }
+    }
+}
