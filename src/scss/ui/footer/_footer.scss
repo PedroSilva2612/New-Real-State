@@ -51,6 +51,7 @@
         border-style: none;
         margin: 0 auto;
         overflow: hidden;
+        width: 280px;
 
         @include m.tablet { 
             display: inline-block;
