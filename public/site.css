@@ -106,3 +106,8 @@ a { text-underline-offset: 0.18em; }
   [data-moment="photo-chapters"].is-live .mo-ph__ch p { line-height: 1.45; }
   [data-moment="photo-chapters"].is-live .mo-ph__head p { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 }
+
+/* links to sections glide there; under reduced motion the jump stays instant (the kit forces auto there) */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
