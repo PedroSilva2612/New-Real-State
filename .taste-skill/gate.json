@@ -1,16 +1,25 @@
 {
- "start": "2026-11-17T11:27:17.041Z",
- "round": 0,
+ "start": "2026-11-17T11:36:23.075Z",
+ "round": 1,
  "idle": 0,
  "errors": 0,
  "status": "pass",
  "history": [
   {
-   "at": "2026-11-17T11:29:25.623Z",
+   "at": "2026-11-17T11:38:32.408Z",
+   "mode": "manual",
+   "status": "fail",
+   "fails": 1,
+   "round": 1,
+   "reused": false,
+   "stopHookActive": false
+  },
+  {
+   "at": "2026-11-17T11:41:08.604Z",
    "mode": "manual",
    "status": "pass",
    "fails": 0,
-   "round": 0,
+   "round": 1,
    "reused": false,
    "stopHookActive": false
   }
@@ -24,11 +33,15 @@
   "category": "inmobiliaria",
   "primary": "Agenda una visita",
   "rounds": 3,
-  "start": "2026-11-17T11:27:17.041Z",
+  "start": "2026-11-17T11:36:23.075Z",
   "by": "gate.mjs --start"
  },
  "manual": true,
- "fp": "db3cc1057a80fb45",
+ "roundKey": "961eecaa5b54ba4e:a708e4bb",
+ "roundFree": false,
+ "idleFree": false,
+ "blockKey": null,
+ "fp": "54f0bf7e959938b9",
  "page": "dist/index.html",
  "found": {
   "fails": [
@@ -144,20 +157,20 @@
     "from": "consistency"
    },
    {
-    "check": "label-centre",
-    "where": "header.nav.nav--centre > div.wrap.nav__bar > div.nav__actions > a.btn.btn--primary \"Agenda una visita\"",
-    "msg": "its label sits 18px off-centre (25px of room at the left, 43px at the right) (and 1 more like it: \"Agenda una visita\")",
-    "fix": "centre the label in its button, or fill the empty side with an icon",
+    "check": "nav-current",
+    "where": "header.nav.nav--centre",
+    "msg": "the nav stays on screen with 5 links to the page's sections, but never marks the one you are in (no link changes as the page scrolls)",
+    "fix": "mark the link of the section on screen (a colour, a weight or a line under it) as the visitor scrolls",
     "widths": [
      1440
     ],
     "from": "consistency"
    },
    {
-    "check": "nav-current",
-    "where": "header.nav.nav--centre",
-    "msg": "the nav stays on screen with 5 links to the page's sections, but never marks the one you are in (no link changes as the page scrolls)",
-    "fix": "mark the link of the section on screen (a colour, a weight or a line under it) as the visitor scrolls",
+    "check": "split-align",
+    "where": "section#contacto > div.wrap > div.grid.grid--top \"No rellenes este campo: Nombre Correo el\"",
+    "msg": "the splits sit two ways: 2 to the top of the taller side (\"Comprar una casa Búsqu\", \"Tu código de descuento\"); 1 to the middle of the taller side (\"No rellenes este campo\")",
+    "fix": "set every split one way: the text to the top of its visual, or every one centred on it",
     "widths": [
      1440
     ],
@@ -212,16 +225,6 @@
      390
     ],
     "from": "consistency"
-   },
-   {
-    "check": "label-centre",
-    "where": "div.span-6.start-7 > form.form > div.btn-row > button.btn.btn--primary \"Agenda una visita\"",
-    "msg": "its label sits 18px off-centre (74px of room at the left, 92px at the right)",
-    "fix": "centre the label in its button, or fill the empty side with an icon",
-    "widths": [
-     390
-    ],
-    "from": "consistency"
    }
   ],
   "crashed": [],
@@ -250,6 +253,6 @@
    "reason": "The page is in Spanish (the brief's language); the check's section-noun list is English only. 'Sobre nosotros' is 'About us', and the other flagged headings name the method's parts ('Un solo asesor', 'Honorarios por escrito')."
   }
  ],
- "warnCount": 17,
- "at": "2026-11-17T11:29:25.623Z"
+ "warnCount": 16,
+ "at": "2026-11-17T11:41:08.604Z"
 }

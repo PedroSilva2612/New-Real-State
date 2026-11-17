@@ -17,14 +17,15 @@
 .form-card .form { display: grid; gap: var(--s-4); }
 @media (max-width: 639px) { .form-card { padding: var(--s-5); } }
 
-/* the tour's floor plan, inside each chapter's panel: where you are in the house */
-.plan { width: 104px; height: auto; display: block; margin-bottom: var(--s-2); overflow: visible; }
-.plan__room { fill: transparent; stroke: color-mix(in oklab, var(--ink) 38%, transparent); stroke-width: 1.2; }
-.plan__room.is-out { stroke-dasharray: 3 2.5; }
-.plan__room.is-past { fill: color-mix(in oklab, var(--ink) 9%, transparent); }
-.plan__room.is-here { fill: color-mix(in oklab, var(--accent) 22%, transparent); stroke: var(--accent); stroke-width: 1.6; }
-.plan__door { stroke: var(--bg); stroke-width: 2.4; }
-.plan__route { fill: none; stroke: var(--accent); stroke-width: 1.4; stroke-dasharray: 2 2.6; stroke-linecap: round; stroke-linejoin: round; }
+/* the tour's floor plan, inside each chapter's panel: where you are in the house and the way you came */
+.plan { width: 168px; height: auto; display: block; margin-bottom: var(--s-3); overflow: visible; }
+.plan__room { fill: transparent; }
+.plan__room.is-past { fill: color-mix(in oklab, var(--ink) 8%, transparent); }
+.plan__room.is-here { fill: color-mix(in oklab, var(--accent) 20%, transparent); }
+.plan__walls { fill: none; stroke: var(--ink); stroke-width: 2.4; stroke-linecap: square; }
+.plan__out { fill: none; stroke: color-mix(in oklab, var(--ink) 55%, transparent); stroke-width: 1.2; stroke-dasharray: 3 3; }
+.plan__doors { fill: none; stroke: color-mix(in oklab, var(--ink) 30%, transparent); stroke-width: 1; }
+.plan__route { fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-dasharray: 2.5 3; stroke-linecap: round; stroke-linejoin: round; }
 .plan__dot { fill: var(--accent); }
 
 /* browser surfaces in the palette */
@@ -37,7 +38,6 @@ a { text-underline-offset: 0.18em; }
 .contact-aside { display: flex; flex-direction: column; align-self: stretch; }
 .contact-photo { flex: 1 1 0; min-height: 200px; }
 .form__pair { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-4); }
-@media (max-width: 639px) { .form__pair { grid-template-columns: 1fr; } .contact-photo { flex: none; aspect-ratio: 3 / 2; } }
 @media (min-width: 640px) and (max-width: 1023px) { #contacto { --h: 2; } .contact-photo { flex: none; aspect-ratio: 16 / 10; } }
 
 
@@ -66,11 +66,38 @@ a { text-underline-offset: 0.18em; }
   transform: scale(var(--mo-z, 1)); transform-origin: 50% 100%; will-change: transform; }
 @media print { [data-moment="photo-chapters"].is-live .mo-ph__stage > .mo-ph__pic > picture > img { transform: none; } }
 
-/* contact on a tablet: the photograph takes the spare height, the form keeps its own */
-@media (min-width: 640px) and (max-width: 1023px) {
+/* contact on a tablet or a phone: the photograph takes the spare height, the form keeps its own */
+@media (max-width: 1023px) {
   .contact-aside { flex: 1 1 auto; }
   .contact-photo { flex: 1 1 0; aspect-ratio: auto; min-height: 280px; }
   #contacto .grid.fill { grid-template-rows: 1fr auto; align-content: stretch; }
   .form-card { flex: none; align-self: start; }
   .form-card .form { height: auto; }
+}
+
+/* frames whose photograph sits in a <picture>: the kit's cover rule, one level down */
+:is(.frame, .panel) > picture > .frame__img { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; }
+
+/* hero: the three facts sit at the foot of the words' column, on the photograph's bottom line */
+@media (min-width: 1024px) {
+  .hero__text { height: 100%; display: flex; flex-direction: column; }
+  .hero__text > .hero-facts { margin-top: auto; }
+}
+
+/* the form: the kit's two-up grid; on a desktop the message grows to the card's foot */
+.form-card .form { display: grid; gap: var(--s-4); }
+.field--grow { display: flex; flex-direction: column; }
+@media (min-width: 1024px) {
+  .form-card .form { grid-template-rows: auto auto 1fr auto auto; }
+  .field--grow textarea { flex: 1 1 auto; min-height: 120px; }
+}
+
+/* the statement one clear step above its heading */
+#nosotros .mo-wh__text { font-size: clamp(32px, 3.4vw + 14px, 64px); line-height: 1.12; max-width: 1120px; }
+
+/* the tour on a phone: a compact panel, the plan beside the count, so the room stays in view */
+@media (max-width: 639px) {
+  [data-moment="photo-chapters"].is-live .mo-ph__panel { padding: var(--s-4); gap: var(--s-2); }
+  [data-moment="photo-chapters"].is-live .plan { position: absolute; top: var(--s-4); right: var(--s-4); width: 84px; margin: 0; }
+  [data-moment="photo-chapters"].is-live .mo-ph__ch h3 { font-size: 20px; margin-top: 30px; }
 }

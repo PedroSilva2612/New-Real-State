@@ -23,6 +23,17 @@ typography:
     fontSize: "clamp(30px, 1.72vw + 23.3px, 48px)"
     fontWeight: 400
     letterSpacing: "-0.025em"
+  statement:
+    fontFamily: "Red Hat Display, system-ui, sans-serif"
+    fontSize: "clamp(32px, 3.4vw + 14px, 64px)"
+    fontWeight: 400
+    lineHeight: 1.12
+    letterSpacing: "-0.025em"
+  code:
+    fontFamily: "Red Hat Display, system-ui, sans-serif"
+    fontSize: "clamp(32px, 2vw + 20px, 48px)"
+    fontWeight: 400
+    letterSpacing: "0.06em"
   title:
     fontFamily: "Red Hat Display, system-ui, sans-serif"
     fontSize: "20px"
@@ -103,6 +114,8 @@ Headlines carry size and tight tracking, never weight. Sentence case everywhere;
 
 ### Hierarchy
 - **Display** (400, 72px at 1440 down to 38px, 1.02): the hero h1 only, at most three lines.
+- **Statement** (400, 64px down to 32px, 1.12): the Sobre nosotros statement only, one clear step above its h2.
+- **Code** (400, 48px down to 32px, tracking +0.06em): the discount code only.
 - **Headline** (400, 48px down to 30px): section h2. A heading may end in a grey second sentence (`.muted`) after a full stop.
 - **Title** (400, 20px): column titles in the method row; tour chapter titles at 28px in the live panel.
 - **Body** (400, 16px/26px): all reading text, lines at most 62 characters.
@@ -123,10 +136,11 @@ Soft radius: 20px on photographs and the form card, 12px on panels, 8px on butto
 ## Components
 
 - **Buttons:** one primary (cobalt, 44px, arrow glyph) per view and one secondary look (text with an underline and arrow). They step on hover and press on click.
-- **Tour panel:** chapter count, a 104px floor plan (rooms in hairline graphite, visited rooms shaded, the room in hand in cobalt with the dotted route from the front door), the chapter title and two lines.
+- **Tour panel:** chapter count, a 168px floor plan (walls in 2.4px graphite with door openings, the terrace's open edge dashed, visited rooms shaded, the room in hand in cobalt, and the dotted cobalt route from the front door that only ever passes through openings), the chapter title and two lines. On a phone the panel is compact: the plan (84px) sits beside the count at the panel's top right.
+- **Hero facts:** three short facts (label in muted 14px, value in 500) at the foot of the words' column on the photograph's bottom line, desktop only.
 - **Services list:** rows with a 1px rule; the photograph beside them swaps instantly to the row under the pointer, focus or tap.
 - **Discount code:** the code set large in the display face with wide tracking, a secondary "Copiar el código" button whose label swaps with a 2px blur for 2 seconds, and a status line.
-- **Form:** visible labels, 48px fields, two-up pairs from 640px, errors under each field in Spanish, one status line, sent through Netlify Forms.
+- **Form:** visible labels, 48px fields, the kit's two-up grid from 640px (name and email, need and code), the message full width and growing to the card's foot on a desktop, errors under each field in Spanish, one status line, sent through Netlify Forms. On tablet and phone the contact photograph takes the spare height and the form card keeps its own.
 
 ## Do's and Don'ts
 
