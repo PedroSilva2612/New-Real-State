@@ -1,0 +1,38 @@
+---
+const { title, description } = Astro.props;
+---
+<!doctype html>
+<html lang="es" data-type="service" data-radius="soft" data-buttons="arrow" data-motion>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{title}</title>
+<meta name="description" content={description}>
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<meta name="theme-color" content="#dfdedb">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400..700&family=Red+Hat+Text:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/system.css">
+<style is:inline>
+:root {
+  --p-bg: #dfdedb; --p-surface: #d3d2ce; --p-ink: #26251e; --p-muted: #57564f;
+  --p-accent: #0069ff; --p-accent-ink: #ffffff; --p-action: #0069ff; --p-action-ink: #ffffff;
+  --p-inv-bg: #26251e; --p-inv-surface: #313029; --p-inv-ink: #dfdedb; --p-inv-muted: #9e9d99;
+  --p-inv-accent: #0069ff; --p-inv-accent-ink: #ffffff; --p-inv-action: #0069ff; --p-inv-action-ink: #ffffff;
+  --font-display: "Red Hat Display", system-ui, sans-serif; --font-text: "Red Hat Text", system-ui, sans-serif;
+  --display-weight: 400; --display-tracking: -0.025em; --display-tracking-xl: -0.035em;
+}
+.doc { padding-block: 120px 96px; } .doc h1 { margin-bottom: 32px; } .doc .stack-4 > * { max-width: 62ch; }
+.doc ul { padding-left: 1.2em; display: grid; gap: 12px; } .doc a { color: var(--action); }
+.doc .back { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 48px; text-decoration: none; color: var(--ink); }
+</style>
+</head>
+<body>
+<main class="wrap doc" id="top">
+  <a class="back" href="/"><img src="/logo.svg" alt="" width="28" height="28">New Real State</a>
+  <slot />
+</main>
+</body>
+</html>

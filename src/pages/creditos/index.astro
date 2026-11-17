@@ -1,0 +1,16 @@
+---
+import Plain from '../../layouts/Plain.astro';
+import credits from '../../credits.json';
+---
+<Plain title="Créditos de las fotografías: New Real State" description="Autoría y licencias de las fotografías de interiores usadas en la web de New Real State.">
+  <h1>Créditos de las fotografías</h1>
+  <div class="stack-4">
+    <p>Las fotografías de las fachadas son de New Real State. Las de interiores proceden de Wikimedia Commons y aquí se muestran recortadas y redimensionadas:</p>
+    <ul>
+      {credits.map((c) => (
+        <li><a href={c.page}>{c.title}</a>, de {c.by}. Licencia {c.licenceUrl ? <a href={c.licenceUrl}>{c.licence}</a> : c.licence}.</li>
+      ))}
+    </ul>
+    <p><a href="/">Volver al inicio</a></p>
+  </div>
+</Plain>

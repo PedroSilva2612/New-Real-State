@@ -1,0 +1,76 @@
+/* page CSS: only what the kit lacks (the client's logo beside the name, the discount code, the form card) */
+.nav__logo { display: inline-flex; align-items: center; gap: 10px; }
+.nav__logo .brand-logo { width: 28px; height: 28px; flex: none; }
+.footer--dark .nav__logo .brand-logo { width: 40px; height: 40px; }
+
+/* the discount code: one ticket on the dark band */
+.promo { display: grid; gap: var(--s-3); }
+.promo__label { font-size: var(--t-label); font-weight: 500; color: var(--muted); margin: 0; }
+.promo__row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-4); justify-content: space-between; }
+.promo__code { font-family: var(--font-display); font-size: clamp(32px, 2vw + 20px, 48px); letter-spacing: 0.06em; color: var(--ink); line-height: 1; }
+.promo__copy-text { display: inline-block; transition: filter 200ms ease, opacity 200ms ease; }
+.promo__copy.is-swapping .promo__copy-text { filter: blur(2px); opacity: 0.6; }
+.promo__status { margin: 0; min-height: 1.5em; font-size: var(--t-small); color: var(--muted); }
+
+/* the form sits on the alternate ground, never over a picture */
+.form-card { background: var(--g-alt, var(--surface)); border-radius: var(--r-lg); padding: var(--s-6); }
+.form-card .form { display: grid; gap: var(--s-4); }
+@media (max-width: 639px) { .form-card { padding: var(--s-5); } }
+
+/* the tour's floor plan, inside each chapter's panel: where you are in the house */
+.plan { width: 104px; height: auto; display: block; margin-bottom: var(--s-2); overflow: visible; }
+.plan__room { fill: transparent; stroke: color-mix(in oklab, var(--ink) 38%, transparent); stroke-width: 1.2; }
+.plan__room.is-out { stroke-dasharray: 3 2.5; }
+.plan__room.is-past { fill: color-mix(in oklab, var(--ink) 9%, transparent); }
+.plan__room.is-here { fill: color-mix(in oklab, var(--accent) 22%, transparent); stroke: var(--accent); stroke-width: 1.6; }
+.plan__door { stroke: var(--bg); stroke-width: 2.4; }
+.plan__route { fill: none; stroke: var(--accent); stroke-width: 1.4; stroke-dasharray: 2 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.plan__dot { fill: var(--accent); }
+
+/* browser surfaces in the palette */
+html { scrollbar-color: color-mix(in oklab, var(--ink) 35%, transparent) transparent; accent-color: var(--action); }
+input, textarea { caret-color: var(--action); }
+a { text-underline-offset: 0.18em; }
+.mo-wh__text { margin: 0; }
+
+/* contact: the photograph under the text column; services: a taller photograph on a phone */
+.contact-aside { display: flex; flex-direction: column; align-self: stretch; }
+.contact-photo { flex: 1 1 0; min-height: 200px; }
+.form__pair { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-4); }
+@media (max-width: 639px) { .form__pair { grid-template-columns: 1fr; } .contact-photo { flex: none; aspect-ratio: 3 / 2; } }
+@media (min-width: 640px) and (max-width: 1023px) { #contacto { --h: 2; } .contact-photo { flex: none; aspect-ratio: 16 / 10; } }
+
+
+/* method: three open columns, then the house across the wrap down to the section's foot */
+.metodo__cols { margin-bottom: var(--s-7); row-gap: var(--s-5); }
+.metodo__cols h3 { margin: 0 0 var(--s-2); }
+.metodo__cols p { margin: 0; max-width: 40ch; }
+.metodo__photo { min-height: 240px; }
+.form-card { align-self: stretch; }
+.form-card .form { height: 100%; align-content: start; }
+
+/* on a phone the split photographs fill their two screens: aim each tall crop at its subject */
+@media (max-width: 639px) {
+  #metodo .frame__img { object-position: 52% 50% !important; }
+  #descuento .frame__img { object-position: 58% 50% !important; }
+}
+
+/* art-directed photographs: the <picture> wrapper takes no box of its own */
+.frame picture, .hero__media picture, .mo-ph__pic picture { display: contents; }
+
+/* the tour's photographs sit in a <picture> (a portrait crop on a phone): the moment's own rules, one level down */
+[data-moment="photo-chapters"] .mo-ph__pic > picture > img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+@media (min-width: 640px) { [data-moment="photo-chapters"]:not(.is-live) .mo-ph__pic > picture > img { aspect-ratio: 4 / 5; max-height: 44svh; } }
+@media (max-width: 639px) { [data-moment="photo-chapters"]:not(.is-live) .mo-ph__pic > picture > img { aspect-ratio: 16 / 10; } }
+[data-moment="photo-chapters"].is-live .mo-ph__stage > .mo-ph__pic > picture > img { width: 100%; height: 100%; aspect-ratio: auto; max-height: none;
+  transform: scale(var(--mo-z, 1)); transform-origin: 50% 100%; will-change: transform; }
+@media print { [data-moment="photo-chapters"].is-live .mo-ph__stage > .mo-ph__pic > picture > img { transform: none; } }
+
+/* contact on a tablet: the photograph takes the spare height, the form keeps its own */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .contact-aside { flex: 1 1 auto; }
+  .contact-photo { flex: 1 1 0; aspect-ratio: auto; min-height: 280px; }
+  #contacto .grid.fill { grid-template-rows: 1fr auto; align-content: stretch; }
+  .form-card { flex: none; align-self: start; }
+  .form-card .form { height: auto; }
+}

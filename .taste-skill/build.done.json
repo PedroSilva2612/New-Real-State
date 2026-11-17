@@ -1,0 +1,11 @@
+{
+ "page": "dist/index.html",
+ "url": null,
+ "root": "dist",
+ "kind": "service",
+ "category": "inmobiliaria",
+ "primary": "Agenda una visita",
+ "rounds": 3,
+ "start": "2026-11-17T11:27:17.041Z",
+ "by": "gate.mjs --start"
+}

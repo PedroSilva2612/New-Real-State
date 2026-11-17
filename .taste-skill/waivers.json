@@ -1,0 +1,7 @@
+[
+ {
+  "check": "copy-headings",
+  "target": "h2#nosotros-h",
+  "reason": "The page is in Spanish (the brief's language); the check's section-noun list is English only. 'Sobre nosotros' is 'About us', and the other flagged headings name the method's parts ('Un solo asesor', 'Honorarios por escrito')."
+ }
+]

@@ -1,0 +1,321 @@
+---
+// New Real State: one-page site (Astro static). Kit from design-taste-frontend lives in public/assets.
+const year = 2026;
+const arrow = '<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg>';
+const img = (id, alt, extra = {}) => ({ id, alt, ...extra });
+const tour = [
+  { n: '01', room: 'El recibidor', title: 'El recibidor: lo que buscas', text: 'Antes de enseñarte nada hablamos de presupuesto, zona, plazos y de cómo vives. De esa charla sale tu lista de requisitos.', photo: img('photo-f129862986', 'Recibidor blanco y luminoso con dos sillas azules junto a la puerta') },
+  { n: '02', room: 'El salón', title: 'El salón: la selección', text: 'Filtramos el mercado y visitamos antes cada casa. Solo te llevamos a las que cumplen tu lista, con fotos y planos reales.', photo: img('photo-f104865570', 'Salón amplio con chimenea de ladrillo oscuro y ventanales a una terraza') },
+  { n: '03', room: 'La cocina', title: 'La cocina: los números', text: 'Tasamos la vivienda, la comparamos con ventas cercanas y te ayudamos con la hipoteca. Sabes el coste total antes de ofertar.', photo: img('photo-f186239762', 'Cocina abierta en gris con mesa de comedor para ocho y luz natural') },
+  { n: '04', room: 'El dormitorio', title: 'El dormitorio: la revisión legal', text: 'Revisamos escrituras, cargas y licencias, y negociamos el precio contigo. Firmas solo cuando todo está comprobado.', photo: img('photo-f180516447', 'Dormitorio blanco con cama doble, escritorio y suelo claro') },
+  { n: '05', room: 'La terraza', title: 'La terraza: las llaves', text: 'Te acompañamos en la notaría y en la entrega de llaves. Después seguimos a un mensaje para suministros y mudanza.', photo: img('photo-f166350776', 'Azotea de una casa blanca con tumbonas y vistas a las montañas al atardecer') },
+];
+const services = [
+  { key: 'comprar', name: 'Comprar una casa', text: 'Búsqueda a medida, visitas filtradas y compañía hasta la notaría.', photo: img('casa-piscina', 'Casa blanca de dos plantas con piscina y porche de madera'), own: true },
+  { key: 'alquilar', name: 'Alquilar un piso', text: 'Pisos y casas revisados en persona, con contrato y fianza explicados.', photo: img('edificio', 'Edificio de viviendas con fachada blanca y negra bajo un cielo claro'), own: true },
+  { key: 'vender', name: 'Vender tu vivienda', text: 'Tasación, fotos y planos profesionales. Ahora a mitad de honorarios.', photo: img('photo-f192968130', 'Cocina moderna con panel de listones de madera y encimera blanca') },
+  { key: 'barrios', name: 'Conocer los barrios', text: 'Colegios, transporte y precios de cada zona antes de que elijas.', photo: img('photo-f146442614', 'Vista aérea de una urbanización de casas blancas con el mar al fondo') },
+];
+// a still floor plan for each chapter: the room in hand in the accent, the rooms already walked through shaded,
+// and the route from the front door to the room in hand
+const rooms = [
+  { x: 2, y: 38, w: 34, h: 30, cx: 19, cy: 53 },   // recibidor (front door on its lower wall)
+  { x: 36, y: 38, w: 50, h: 30, cx: 61, cy: 53 },  // salon
+  { x: 86, y: 38, w: 42, h: 30, cx: 107, cy: 53 }, // cocina
+  { x: 2, y: 2, w: 62, h: 36, cx: 33, cy: 20 },    // dormitorio
+  { x: 64, y: 2, w: 64, h: 36, cx: 96, cy: 20, out: true }, // terraza
+];
+const route = [[19, 72], [19, 53], [61, 53], [107, 53], [33, 20], [96, 20]];
+const plan = (k) => {
+  const cells = rooms.map((r, i) => `<rect class="plan__room${i === k ? ' is-here' : i < k ? ' is-past' : ''}${r.out ? ' is-out' : ''}" x="${r.x}" y="${r.y}" width="${r.w}" height="${r.h}"/>`).join('');
+  const pts = route.slice(0, k + 2).map(([x, y]) => `${x},${y}`).join(' ');
+  const here = rooms[k];
+  return `<svg class="plan" viewBox="0 0 130 74" aria-hidden="true">${cells}<path class="plan__door" d="M13 68h12"/><polyline class="plan__route" points="${pts}"/><circle class="plan__dot" cx="${here.cx}" cy="${here.cy}" r="3.2"/></svg>`;
+};
+// one photograph: srcset by width, width/height to hold its box, and on a phone (under 640px) a portrait crop
+// made for the tall frames there (art direction), so the phone never loads a landscape file it would crop away
+const D = {"casa-mar": [1800, 1200], "casa-piscina": [1800, 1200], "casa-madera": [1800, 1200], "edificio": [1800, 1200], "photo-f129862986": [1600, 1308], "photo-f104865570": [1600, 1067], "photo-f186239762": [1600, 1068], "photo-f180516447": [1600, 1067], "photo-f166350776": [1600, 1068], "photo-f192968130": [1600, 1068], "photo-f122681355": [1600, 1067], "photo-f146442614": [1600, 1200], "photo-f51439611": [1600, 1067], "photo-f192968130-m": [437, 1068], "photo-f186239762-m": [683, 1068], "photo-f129862986-m": [740, 1156], "photo-f122681355-m": [345, 961], "casa-madera-m": [700, 2121], "edificio-m": [491, 1200], "photo-f166350776-m": [683, 1068], "casa-piscina-m": [491, 1200], "photo-f146442614-m": [491, 1200], "photo-f180516447-m": [682, 1067], "photo-f104865570-m": [682, 1067]};
+const photo = ({ stem, own = false, alt, sizes, cls = 'frame__img', lazy = true, style = '', attrs = '' }) => {
+  const set = own
+    ? `/assets/img/${stem}-600.webp 600w, /assets/img/${stem}-1000.webp 1000w, /assets/img/${stem}-1800.webp 1800w`
+    : `/assets/img/${stem}-500.webp 500w, /assets/img/${stem}-960.webp 960w, /assets/img/${stem}.webp 1600w`;
+  const src = own ? `/assets/img/${stem}-1000.webp` : `/assets/img/${stem}-960.webp`;
+  const [w, h] = D[stem];
+  const m = D[stem + '-m'];
+  const img = `<img class="${cls}" srcset="${set}" sizes="${sizes}" src="${src}" width="${w}" height="${h}" alt="${alt}"${lazy ? ' loading="lazy"' : ''}${style ? ` style="${style}"` : ''} ${attrs}>`;
+  return m ? `<picture><source media="(max-width: 639px)" srcset="/assets/img/${stem}-m.webp" width="${m[0]}" height="${m[1]}">${img}</picture>` : img;
+};
+const pic = (p, sizes, eager = false, own = false) => {
+  const set = own
+    ? `/assets/img/${p.id}-600.webp 600w, /assets/img/${p.id}-1000.webp 1000w, /assets/img/${p.id}-1800.webp 1800w`
+    : `/assets/img/${p.id}-500.webp 500w, /assets/img/${p.id}-960.webp 960w, /assets/img/${p.id}.webp 1600w`;
+  const src = own ? `/assets/img/${p.id}-1000.webp` : `/assets/img/${p.id}-960.webp`;
+  return { srcset: set, src, sizes, loading: eager ? 'eager' : 'lazy' };
+};
+---
+<!doctype html>
+<html lang="es" data-type="service" data-radius="soft" data-buttons="arrow" data-motion>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>New Real State: inmobiliaria para comprar, vender o alquilar casa</title>
+<meta name="description" content="Un mismo asesor te acompaña en la compra, la venta o el alquiler de tu vivienda, de la primera visita a la entrega de llaves.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="New Real State: inmobiliaria para comprar, vender o alquilar casa">
+<meta property="og:description" content="Recorre la casa paso a paso y vende con la mitad de honorarios hasta el 31 de diciembre.">
+<meta property="og:image" content="/share.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<meta name="theme-color" content="#dfdedb">
+<!-- <link rel="canonical" href="https://(dominio del cliente)/"> -->
+<meta name="site-kind" content="other">
+<meta name="page-type" content="service">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400..700&family=Red+Hat+Text:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/system.css">
+<link rel="stylesheet" href="/assets/ui/cards.css">
+<link rel="stylesheet" href="/assets/motion/motion.css">
+<link rel="stylesheet" href="/assets/layout/layout.css">
+<link rel="stylesheet" href="/assets/icons/icon.css">
+<style is:inline>
+:root {
+  --p-bg: #dfdedb; --p-surface: #d3d2ce; --p-ink: #26251e; --p-muted: #57564f;
+  --p-accent: #0069ff; --p-accent-ink: #ffffff; --p-action: #0069ff; --p-action-ink: #ffffff;
+  --p-inv-bg: #26251e; --p-inv-surface: #313029; --p-inv-ink: #dfdedb; --p-inv-muted: #9e9d99;
+  --p-inv-accent: #0069ff; --p-inv-accent-ink: #ffffff; --p-inv-action: #0069ff; --p-inv-action-ink: #ffffff;
+  --font-display: "Red Hat Display", system-ui, sans-serif;
+  --font-text: "Red Hat Text", system-ui, sans-serif;
+  --display-weight: 400;
+  --display-tracking: -0.025em;
+  --display-tracking-xl: -0.035em;
+}
+</style>
+<link rel="stylesheet" href="/site.css">
+<script is:inline>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
+<script is:inline>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
+<link rel="modulepreload" href="/assets/moments/moments.js">
+<link rel="modulepreload" href="/assets/moments/lib.js">
+<link rel="modulepreload" href="/assets/moments/photo-chapters/moment.js">
+<link rel="modulepreload" href="/assets/moments/word-highlight/moment.js">
+</head>
+<body>
+<!-- type: service
+     deal: hero split, nav nav-centre, close close-type, footer footer-dark, rhythm dark-band, buttons arrow, mark: client logo
+     moments: photo-chapters (#recorrido, pinned by the brief: a walk through a house), word-highlight (#nosotros, dealt) -->
+
+<header class="nav nav--centre">
+  <div class="wrap nav__bar">
+    <a class="skip-link" href="#top">Saltar al contenido</a>
+    <a class="nav__logo" href="#top" aria-label="New Real State, inicio"><img class="brand-logo" src="/logo.svg" alt="" width="28" height="28"><span>New Real State</span></a>
+    <nav class="nav__links" aria-label="Principal">
+      <div class="nav__item"><a class="nav__link" href="#recorrido">Recorrido</a></div>
+      <div class="nav__item"><a class="nav__link" href="#nosotros">Nosotros</a></div>
+      <div class="nav__item"><a class="nav__link" href="#servicios">Servicios</a></div>
+      <div class="nav__item"><a class="nav__link" href="#descuento">Descuento</a></div>
+      <div class="nav__item"><a class="nav__link" href="#contacto">Contacto</a></div>
+    </nav>
+    <div class="nav__actions">
+      <a class="btn btn--primary" href="#contacto">Agenda una visita</a>
+    </div>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Menú">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero hero--split" data-enter aria-labelledby="hero-h">
+    <div class="wrap"><div class="hero-text grid hero__grid">
+      <div class="hero__text span-5">
+        <h1 id="hero-h">Inmobiliaria para comprar, vender o alquilar</h1>
+        <p class="hero__lead">Un mismo asesor te acompaña de la primera visita a la entrega de llaves: busca contigo, negocia y revisa cada papel.</p>
+        <div class="btn-row">
+          <a class="btn btn--primary" href="#contacto">Agenda una visita<Fragment set:html={arrow} /></a>
+          <a class="btn btn--secondary" href="#recorrido">Ver el recorrido</a>
+        </div>
+      </div>
+      <div class="hero__media span-6 start-7">
+        <Fragment set:html={photo({ stem: 'casa-mar', own: true, alt: 'Casa de cristal curvo con terraza de césped frente al mar', sizes: '(min-width: 1024px) 76vw, 100vw', cls: '', lazy: false, style: '--ly-pos: 38% 50%', attrs: 'fetchpriority="high" data-source="client" data-subject="house"' })} />
+        <div class="ly-float">
+          <div class="ly-float__row"><span class="ly-live">Venta</span><span>hasta el 31 dic</span></div>
+          <div class="ly-float__title">50&nbsp;% menos en honorarios</div>
+        </div>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="section" id="recorrido" data-moment="photo-chapters" aria-labelledby="recorrido-h">
+    <div class="wrap mo-ph">
+      <div class="mo-ph__head"><h2 id="recorrido-h">El recorrido de compra en 5 pasos</h2><p>Cada estancia es un paso: así trabajamos contigo desde que cruzas la puerta hasta que la casa es tuya.</p></div>
+      <ol class="mo-ph__list">
+        {tour.map((c, i) => {
+          return (
+            <li class="mo-ph__ch">
+              <figure class="mo-ph__pic"><Fragment set:html={photo({ stem: c.photo.id, alt: c.photo.alt, sizes: '100vw', cls: '', attrs: `data-source="stand-in" data-subject="${c.room}"` })} /></figure>
+              <Fragment set:html={plan(i)} />
+              <h3>{c.title}</h3>
+              <p>{c.text}</p>
+            </li>
+          );
+        })}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section statement" id="nosotros" data-moment="word-highlight" aria-labelledby="nosotros-h">
+    <div class="wrap">
+      <div class="section-head"><h2 id="nosotros-h">Sobre nosotros</h2></div>
+      <p class="mo-wh__text">New Real State nació para que comprar o vender una casa se entienda paso a paso: un asesor por cliente, cada vivienda visitada antes por nosotros y <strong>los honorarios por escrito</strong> desde el primer día.</p>
+    </div>
+  </section>
+
+  <section class="section" id="metodo" style="--hm: 2" aria-labelledby="metodo-h">
+    <div class="wrap">
+      <div class="section-head"><h2 id="metodo-h">Cómo trabajamos. <span class="muted">Una persona de principio a fin.</span></h2></div>
+      <div class="grid metodo__cols">
+        <div class="span-4"><h3 class="t-card">Un solo asesor</h3><p>La misma persona contigo desde la primera llamada hasta la firma.</p></div>
+        <div class="span-4"><h3 class="t-card">Visitas filtradas</h3><p>Entramos antes en cada vivienda y te contamos lo que no sale en las fotos.</p></div>
+        <div class="span-4"><h3 class="t-card">Honorarios por escrito</h3><p>Sabes lo que pagas antes de empezar, sin cargos que aparezcan al final.</p></div>
+      </div>
+      <div class="frame frame--photo fill metodo__photo">
+        <Fragment set:html={photo({ stem: 'casa-madera', own: true, alt: 'Casa de madera y cristal con un paseante y su perro frente a la entrada', sizes: '100vw', style: 'object-position: 50% 62%', attrs: 'data-source="client" data-subject="house"' })} />
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="servicios" style="--hm: 2" aria-labelledby="servicios-h">
+    <div class="wrap">
+      <div class="section-head"><h2 id="servicios-h">Servicios inmobiliarios</h2><p>Elige lo que necesitas; el método es el mismo en los cuatro.</p></div>
+      <div class="grid grid--top fill" data-peek>
+        <ul class="rows span-5">
+          {services.map((s) => (
+            <li data-peek-to={s.key} tabindex="0"><span class="rows__name">{s.name}</span><p>{s.text}</p></li>
+          ))}
+        </ul>
+        <div class="frame frame--photo frame--fill span-6 start-7">
+          {services.map((s, i) => (
+            <Fragment set:html={photo({ stem: s.photo.id, own: s.own, alt: s.photo.alt, sizes: '(min-width: 1024px) 46vw, 100vw', attrs: `data-peek-for="${s.key}"${i > 0 ? ' hidden' : ''} data-source="${s.own ? 'client' : 'stand-in'}" data-subject="${s.key}"` })} />
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section ground-inverse" id="descuento" style="--hm: 2" aria-labelledby="descuento-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="descuento-h">Descuento del 50&nbsp;% en honorarios</h2>
+        <p>Firma el encargo de venta antes del 31 de diciembre de 2026 y pagas el 50&nbsp;% de nuestros honorarios habituales.</p>
+      </div>
+      <div class="grid grid--top fill">
+        <div class="span-5 stack-6">
+          <div class="promo" data-promo>
+            <p class="promo__label" id="promo-label">Tu código de descuento</p>
+            <div class="promo__row">
+              <code class="promo__code" aria-labelledby="promo-label">LLAVES50</code>
+              <button class="btn btn--secondary promo__copy" type="button" data-copy="LLAVES50"><span class="promo__copy-text">Copiar el código</span></button>
+            </div>
+            <p class="promo__status" role="status" aria-live="polite"></p>
+          </div>
+          <p class="t-small">Un encargo de venta por cliente, en exclusiva de seis meses. No se suma a otras ofertas.</p>
+          <a class="link" href="#contacto">Usar el código al pedir la visita</a>
+        </div>
+        <div class="frame frame--photo frame--fill span-6 start-7">
+          <Fragment set:html={photo({ stem: 'photo-f122681355', alt: 'Salón y cocina blancos de planta abierta con isla, techos artesonados y grandes ventanales', sizes: '(min-width: 1024px) 46vw, 100vw', attrs: 'data-source="stand-in" data-subject="home for sale"' })} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contacto" style="--hm: 2" aria-labelledby="contacto-h">
+    <div class="wrap">
+      <div class="grid grid--top fill">
+        <div class="span-5 stack-6 contact-aside">
+          <div class="section-head">
+            <h2 id="contacto-h">Visitas y contacto</h2>
+            <p>Cuéntanos qué buscas y te proponemos día y hora para una primera visita sin compromiso, de unos 45 minutos, en la oficina o por videollamada.</p>
+          </div>
+          <div class="frame frame--photo contact-photo">
+            <Fragment set:html={photo({ stem: 'photo-f51439611', alt: 'Salón de techos altos con pared de ladrillo visto, jarrones negros y lámpara de pie', sizes: '(min-width: 1024px) 40vw, 100vw', attrs: 'data-source="stand-in" data-subject="living room"' })} />
+          </div>
+        </div>
+        <div class="span-6 start-7 form-card">
+          <form class="form" name="visita" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field" data-endpoint="/"
+            data-sent="Tu solicitud de visita está enviada. Te respondemos en un día laborable."
+            data-sending="Enviando"
+            data-failed="No se ha enviado: falló la conexión. Lo que escribiste sigue aquí; inténtalo de nuevo."
+            data-fix="Revisa {n} campos marcados." novalidate>
+            <input type="hidden" name="form-name" value="visita">
+            <p class="sr-only"><label>No rellenes este campo: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+            <div class="form__pair">
+              <div class="field"><label for="f-name">Nombre</label>
+                <input id="f-name" name="nombre" type="text" autocomplete="name" required aria-describedby="f-name-err">
+                <p class="field__error" id="f-name-err" hidden>Escribe tu nombre para saber a quién contestar.</p></div>
+              <div class="field"><label for="f-email">Correo electrónico</label>
+                <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="f-email-err">
+                <p class="field__error" id="f-email-err" hidden>Escribe un correo con @, por ejemplo nombre@correo.com.</p></div>
+            </div>
+            <div class="form__pair">
+              <div class="field"><label for="f-need">Qué necesitas</label>
+                <select id="f-need" name="servicio" required aria-describedby="f-need-err">
+                  <option value="">Elige una opción</option>
+                  <option>Comprar una casa</option>
+                  <option>Alquilar un piso</option>
+                  <option>Vender tu vivienda</option>
+                  <option>Conocer los barrios</option>
+                </select>
+                <p class="field__error" id="f-need-err" hidden>Elige qué necesitas de la lista.</p></div>
+              <div class="field"><label for="f-code">Código (opcional)</label>
+                <input id="f-code" name="codigo" type="text" autocomplete="off" autocapitalize="characters"></div>
+            </div>
+            <div class="field"><label for="f-msg">Mensaje</label>
+              <textarea id="f-msg" name="mensaje" rows="3"></textarea></div>
+            <div class="btn-row"><button class="btn btn--primary" type="submit">Agenda una visita</button></div>
+            <p class="form__status" role="status" data-form-status></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer closing footer--dark ground-inverse" id="cierre" aria-labelledby="close-h">
+  <div class="wrap">
+    <div class="closing__cta close--type">
+      <div class="section-head">
+        <h2 id="close-h">Tu próxima casa empieza con una visita</h2>
+        <p class="t-small muted">Te respondemos en un día laborable.</p>
+      </div>
+      <a class="btn btn--primary btn--xl btn--wide" href="#contacto">Agenda una visita<Fragment set:html={arrow} /></a>
+    </div>
+    <div class="closing__links">
+      <div class="grid">
+        <div class="span-4 stack-4">
+          <a class="nav__logo" href="#top" aria-label="New Real State, inicio"><img class="brand-logo" src="/logo.svg" alt="" width="28" height="28" loading="lazy"><span>New Real State</span></a>
+          <p class="footer__lede">Agencia inmobiliaria para comprar, vender y alquilar viviendas.</p>
+        </div>
+        <div class="span-2 footer__col"><h3>Recorrido</h3><ul><li><a href="#recorrido">Los cinco pasos</a></li><li><a href="#metodo">Cómo trabajamos</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Servicios</h3><ul><li><a href="#servicios">Comprar y vender</a></li><li><a href="#servicios">Alquilar</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Agencia</h3><ul><li><a href="#nosotros">Nosotros</a></li><li><a href="#descuento">Descuento</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Contacto</h3><ul><li><a href="#contacto">Pedir una visita</a></li><li><a href="/privacidad/">Privacidad</a></li></ul></div>
+      </div>
+      <div class="footer__legal">
+        <span>&copy; {year} New Real State &nbsp; Diseño y desarrollo: Pedro Silva</span>
+        <div class="socials"></div>
+        <a class="credits" href="/creditos/">Fotografías vía Wikimedia Commons</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<nav class="actionbar" aria-label="Acciones rápidas">
+  <a class="btn btn--primary" href="#contacto">Agenda una visita</a>
+</nav>
+
+<script type="module" src="/assets/system.js" is:inline></script>
+<script type="module" src="/assets/motion/motion.js" is:inline></script>
+<script type="module" src="/assets/layout/layout.js" is:inline></script>
+<script type="module" src="/site.js" is:inline></script>
+</body>
+</html>

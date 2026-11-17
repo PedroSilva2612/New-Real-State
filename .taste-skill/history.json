@@ -1,0 +1,16 @@
+{
+ "palettes": [],
+ "types": [],
+ "dealt": [
+  "newsreader",
+  "red-hat",
+  "albert"
+ ],
+ "moments": [
+  {
+   "id": "word-highlight",
+   "at": "2026-11-17T10:03:47.843Z",
+   "seed": "efc2628d"
+  }
+ ]
+}

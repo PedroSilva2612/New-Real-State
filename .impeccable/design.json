@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "name": "New Real State",
+  "source": "built system (src/pages/index.astro, public/site.css, public/assets/system.css)",
+  "motion": {
+    "tour": "photo-chapters: each room photograph uncovered from its foot over the last with a settle from scale 1.06, scrubbed to scroll, about two thirds of a screen per chapter; static chapters under reduced motion",
+    "statement": "word-highlight: words turn from half ink to ink as they cross the middle of the screen",
+    "button": "hover step and press scale from the kit motion layer; 180ms ease",
+    "copy-code": "label swap with filter blur(2px) and opacity .6 for 120ms, reverts after 2s"
+  },
+  "focus": "2px outline in logo cobalt (#0069ff), shown at once, never animated",
+  "elevation": "flat; no shadows"
+}
