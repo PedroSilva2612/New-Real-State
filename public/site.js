@@ -17,3 +17,20 @@ for (const btn of document.querySelectorAll('[data-copy]')) {
     timer = setTimeout(() => swap(original), 2000);
   });
 }
+
+// Links to a section of the page glide there. Only a click does: keyboard focus keeps the browser's
+// instant scroll, and so does reduced motion. The address and the focus end where a normal jump would.
+const calm = window.matchMedia('(prefers-reduced-motion: reduce)');
+document.addEventListener('click', (e) => {
+  if (calm.matches || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  const link = e.target.closest('a[href^="#"]');
+  if (!link) return;
+  const id = decodeURIComponent(link.getAttribute('href').slice(1));
+  const target = id ? document.getElementById(id) : null;
+  if (!target) return;
+  e.preventDefault();
+  target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  history.pushState(null, '', '#' + id);
+  if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+  target.focus({ preventScroll: true });
+});

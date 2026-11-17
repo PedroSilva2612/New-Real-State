@@ -1,16 +1,34 @@
 {
- "start": "2026-11-17T11:45:47.342Z",
- "round": 0,
+ "start": "2026-11-17T12:08:54.539Z",
+ "round": 1,
  "idle": 0,
  "errors": 0,
  "status": "pass",
  "history": [
   {
-   "at": "2026-11-17T11:47:56.724Z",
+   "at": "2026-11-17T12:11:19.035Z",
+   "mode": "manual",
+   "status": "fail",
+   "fails": 1,
+   "round": 1,
+   "reused": false,
+   "stopHookActive": false
+  },
+  {
+   "at": "2026-11-17T12:11:28.669Z",
+   "mode": "manual",
+   "status": "fail",
+   "fails": 1,
+   "round": 1,
+   "reused": true,
+   "stopHookActive": false
+  },
+  {
+   "at": "2026-11-17T12:14:20.952Z",
    "mode": "manual",
    "status": "pass",
    "fails": 0,
-   "round": 0,
+   "round": 1,
    "reused": false,
    "stopHookActive": false
   }
@@ -24,11 +42,15 @@
   "category": "inmobiliaria",
   "primary": "Agenda una visita",
   "rounds": 3,
-  "start": "2026-11-17T11:45:47.342Z",
+  "start": "2026-11-17T12:08:54.539Z",
   "by": "gate.mjs --start"
  },
  "manual": true,
- "fp": "29a2cbde788309a4",
+ "roundKey": "b1dea4a2352f20da:a708e4bb",
+ "roundFree": false,
+ "idleFree": false,
+ "blockKey": null,
+ "fp": "7486bbcb7bdd5449",
  "page": "dist/index.html",
  "found": {
   "fails": [
@@ -241,5 +263,5 @@
   }
  ],
  "warnCount": 16,
- "at": "2026-11-17T11:47:56.724Z"
+ "at": "2026-11-17T12:14:20.952Z"
 }
