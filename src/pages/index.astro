@@ -39,7 +39,7 @@ const plan = (k) => {
 };
 // one photograph: srcset by width, width/height to hold its box, and on a phone (under 640px) a portrait crop
 // made for the tall frames there (art direction), so the phone never loads a landscape file it would crop away
-const D = {"casa-mar": [1800, 1200], "casa-piscina": [1800, 1200], "casa-madera": [1800, 1200], "edificio": [1800, 1200], "photo-f129862986": [1600, 1308], "photo-f104865570": [1600, 1067], "photo-f186239762": [1600, 1068], "photo-f180516447": [1600, 1067], "photo-f166350776": [1600, 1068], "photo-f192968130": [1600, 1068], "photo-f122681355": [1600, 1067], "photo-f146442614": [1600, 1200], "photo-f51439611": [1600, 1067], "photo-f192968130-m": [437, 1068], "photo-f186239762-m": [683, 1068], "photo-f129862986-m": [740, 1156], "photo-f122681355-m": [345, 961], "casa-madera-m": [700, 2121], "edificio-m": [491, 1200], "photo-f166350776-m": [683, 1068], "casa-piscina-m": [491, 1200], "photo-f146442614-m": [491, 1200], "photo-f180516447-m": [682, 1067], "photo-f104865570-m": [682, 1067], "photo-f51439611-m": [586, 1067]};
+const D = {"casa-mar": [1800, 1200], "casa-piscina": [1800, 1200], "casa-madera": [1800, 1200], "edificio": [1800, 1200], "photo-f129862986": [1600, 1308], "photo-f104865570": [1600, 1067], "photo-f186239762": [1600, 1068], "photo-f180516447": [1600, 1067], "photo-f166350776": [1600, 1068], "photo-f192968130": [1600, 1068], "photo-f122681355": [1600, 1067], "photo-f146442614": [1600, 1200], "photo-f51439611": [1600, 1067], "photo-f192968130-m": [437, 1068], "photo-f186239762-m": [478, 748], "photo-f129862986-m": [519, 811], "photo-f122681355-m": [345, 961], "casa-madera-m": [700, 2121], "edificio-m": [491, 1200], "photo-f166350776-m": [683, 1068], "casa-piscina-m": [491, 1200], "photo-f146442614-m": [491, 1200], "photo-f180516447-m": [682, 1067], "photo-f104865570-m": [546, 854], "photo-f51439611-m": [586, 1067]};
 const photo = ({ stem, own = false, alt, sizes, cls = 'frame__img', lazy = true, style = '', attrs = '' }) => {
   const set = own
     ? `/assets/img/${stem}-600.webp 600w, /assets/img/${stem}-1000.webp 1000w, /assets/img/${stem}-1800.webp 1800w`
@@ -140,17 +140,13 @@ const pic = (p, sizes, eager = false, own = false) => {
           <a class="btn btn--secondary" href="#recorrido">Ver el recorrido</a>
         </div>
         <dl class="hero-facts">
-          <div><dt>Servicios</dt><dd>Compra, venta y alquiler</dd></div>
-          <div><dt>Método</dt><dd>Un asesor de principio a fin</dd></div>
-          <div><dt>Recorrido</dt><dd>5 pasos hasta las llaves</dd></div>
+          <div><dt>Oferta de venta</dt><dd>50&nbsp;% menos en honorarios</dd></div>
+          <div><dt>Hasta</dt><dd>31 de diciembre de 2026</dd></div>
+          <div><dt>Código</dt><dd>LLAVES50</dd></div>
         </dl>
       </div>
       <div class="hero__media span-6 start-7">
         <Fragment set:html={photo({ stem: 'casa-mar', own: true, alt: 'Casa de cristal curvo con terraza de césped frente al mar', sizes: '(min-width: 1024px) 76vw, 100vw', cls: '', lazy: false, style: '--ly-pos: 38% 50%', attrs: 'fetchpriority="high" data-source="client" data-subject="house"' })} />
-        <div class="ly-float">
-          <div class="ly-float__row"><span class="ly-live">Venta</span><span>hasta el 31 dic</span></div>
-          <div class="ly-float__title">50&nbsp;% menos en honorarios</div>
-        </div>
       </div>
     </div></div>
   </section>

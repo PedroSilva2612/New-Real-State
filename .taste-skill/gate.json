@@ -1,25 +1,16 @@
 {
- "start": "2026-11-17T11:36:23.075Z",
- "round": 1,
+ "start": "2026-11-17T11:45:47.342Z",
+ "round": 0,
  "idle": 0,
  "errors": 0,
  "status": "pass",
  "history": [
   {
-   "at": "2026-11-17T11:38:32.408Z",
-   "mode": "manual",
-   "status": "fail",
-   "fails": 1,
-   "round": 1,
-   "reused": false,
-   "stopHookActive": false
-  },
-  {
-   "at": "2026-11-17T11:41:08.604Z",
+   "at": "2026-11-17T11:47:56.724Z",
    "mode": "manual",
    "status": "pass",
    "fails": 0,
-   "round": 1,
+   "round": 0,
    "reused": false,
    "stopHookActive": false
   }
@@ -33,15 +24,11 @@
   "category": "inmobiliaria",
   "primary": "Agenda una visita",
   "rounds": 3,
-  "start": "2026-11-17T11:36:23.075Z",
+  "start": "2026-11-17T11:45:47.342Z",
   "by": "gate.mjs --start"
  },
  "manual": true,
- "roundKey": "961eecaa5b54ba4e:a708e4bb",
- "roundFree": false,
- "idleFree": false,
- "blockKey": null,
- "fp": "54f0bf7e959938b9",
+ "fp": "29a2cbde788309a4",
  "page": "dist/index.html",
  "found": {
   "fails": [
@@ -157,20 +144,20 @@
     "from": "consistency"
    },
    {
-    "check": "nav-current",
-    "where": "header.nav.nav--centre",
-    "msg": "the nav stays on screen with 5 links to the page's sections, but never marks the one you are in (no link changes as the page scrolls)",
-    "fix": "mark the link of the section on screen (a colour, a weight or a line under it) as the visitor scrolls",
+    "check": "orphan",
+    "where": "div.hero__text.span-5 > dl.hero-facts > div:nth-of-type(2) > dd \"31 de diciembre de 2026\"",
+    "msg": "its last line holds only \"2026\"",
+    "fix": "rebalance the text (text-wrap: pretty, or a shorter line) so the last line holds more than one short word",
     "widths": [
      1440
     ],
     "from": "consistency"
    },
    {
-    "check": "split-align",
-    "where": "section#contacto > div.wrap > div.grid.grid--top \"No rellenes este campo: Nombre Correo el\"",
-    "msg": "the splits sit two ways: 2 to the top of the taller side (\"Comprar una casa Búsqu\", \"Tu código de descuento\"); 1 to the middle of the taller side (\"No rellenes este campo\")",
-    "fix": "set every split one way: the text to the top of its visual, or every one centred on it",
+    "check": "nav-current",
+    "where": "header.nav.nav--centre",
+    "msg": "the nav stays on screen with 5 links to the page's sections, but never marks the one you are in (no link changes as the page scrolls)",
+    "fix": "mark the link of the section on screen (a colour, a weight or a line under it) as the visitor scrolls",
     "widths": [
      1440
     ],
@@ -254,5 +241,5 @@
   }
  ],
  "warnCount": 16,
- "at": "2026-11-17T11:41:08.604Z"
+ "at": "2026-11-17T11:47:56.724Z"
 }

@@ -46,8 +46,7 @@ a { text-underline-offset: 0.18em; }
 .metodo__cols h3 { margin: 0 0 var(--s-2); }
 .metodo__cols p { margin: 0; max-width: 40ch; }
 .metodo__photo { min-height: 240px; }
-.form-card { align-self: stretch; }
-.form-card .form { height: 100%; align-content: start; }
+.form-card { align-self: start; }
 
 /* on a phone the split photographs fill their two screens: aim each tall crop at its subject */
 @media (max-width: 639px) {
@@ -66,11 +65,18 @@ a { text-underline-offset: 0.18em; }
   transform: scale(var(--mo-z, 1)); transform-origin: 50% 100%; will-change: transform; }
 @media print { [data-moment="photo-chapters"].is-live .mo-ph__stage > .mo-ph__pic > picture > img { transform: none; } }
 
-/* contact on a tablet or a phone: the photograph takes the spare height, the form keeps its own */
+/* contact on a tablet or a phone: the words, then the form, then the photograph taking the spare height */
+@media (max-width: 1023px) {
+  .contact-aside { display: contents; }
+  #contacto .grid.fill > * , #contacto .contact-aside > * { grid-column: 1 / -1; }
+  #contacto .section-head { order: 0; }
+  #contacto .form-card { order: 1; }
+  #contacto .contact-photo { order: 2; }
+  #contacto .grid.fill { grid-template-rows: auto auto 1fr; }
+}
 @media (max-width: 1023px) {
   .contact-aside { flex: 1 1 auto; }
   .contact-photo { flex: 1 1 0; aspect-ratio: auto; min-height: 280px; }
-  #contacto .grid.fill { grid-template-rows: 1fr auto; align-content: stretch; }
   .form-card { flex: none; align-self: start; }
   .form-card .form { height: auto; }
 }
@@ -87,10 +93,7 @@ a { text-underline-offset: 0.18em; }
 /* the form: the kit's two-up grid; on a desktop the message grows to the card's foot */
 .form-card .form { display: grid; gap: var(--s-4); }
 .field--grow { display: flex; flex-direction: column; }
-@media (min-width: 1024px) {
-  .form-card .form { grid-template-rows: auto auto 1fr auto auto; }
-  .field--grow textarea { flex: 1 1 auto; min-height: 120px; }
-}
+
 
 /* the statement one clear step above its heading */
 #nosotros .mo-wh__text { font-size: clamp(32px, 3.4vw + 14px, 64px); line-height: 1.12; max-width: 1120px; }
@@ -100,4 +103,6 @@ a { text-underline-offset: 0.18em; }
   [data-moment="photo-chapters"].is-live .mo-ph__panel { padding: var(--s-4); gap: var(--s-2); }
   [data-moment="photo-chapters"].is-live .plan { position: absolute; top: var(--s-4); right: var(--s-4); width: 84px; margin: 0; }
   [data-moment="photo-chapters"].is-live .mo-ph__ch h3 { font-size: 20px; margin-top: 30px; }
+  [data-moment="photo-chapters"].is-live .mo-ph__ch p { line-height: 1.45; }
+  [data-moment="photo-chapters"].is-live .mo-ph__head p { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 }

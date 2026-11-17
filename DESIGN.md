@@ -127,7 +127,7 @@ One section per screen. Every section is exactly one or two viewport heights (tw
 
 ## Elevation & Depth
 
-Flat. No shadows. Depth comes from photographs and from the one dark band. The float card in the hero and the tour panel are opaque Stone with a hairline, never glass.
+Flat. No shadows. Depth comes from photographs and from the one dark band. The tour panel is opaque Stone, never glass.
 
 ## Shapes
 
@@ -137,10 +137,10 @@ Soft radius: 20px on photographs and the form card, 12px on panels, 8px on butto
 
 - **Buttons:** one primary (cobalt, 44px, arrow glyph) per view and one secondary look (text with an underline and arrow). They step on hover and press on click.
 - **Tour panel:** chapter count, a 168px floor plan (walls in 2.4px graphite with door openings, the terrace's open edge dashed, visited rooms shaded, the room in hand in cobalt, and the dotted cobalt route from the front door that only ever passes through openings), the chapter title and two lines. On a phone the panel is compact: the plan (84px) sits beside the count at the panel's top right.
-- **Hero facts:** three short facts (label in muted 14px, value in 500) at the foot of the words' column on the photograph's bottom line, desktop only.
+- **Hero facts:** the offer as three short facts (offer, end date, code; label in muted 14px, value in 500) at the foot of the words' column on the photograph's bottom line, desktop only. No float card on the photograph.
 - **Services list:** rows with a 1px rule; the photograph beside them swaps instantly to the row under the pointer, focus or tap.
 - **Discount code:** the code set large in the display face with wide tracking, a secondary "Copiar el código" button whose label swaps with a 2px blur for 2 seconds, and a status line.
-- **Form:** visible labels, 48px fields, the kit's two-up grid from 640px (name and email, need and code), the message full width and growing to the card's foot on a desktop, errors under each field in Spanish, one status line, sent through Netlify Forms. On tablet and phone the contact photograph takes the spare height and the form card keeps its own.
+- **Form:** visible labels, 48px fields, the kit's two-up grid from 640px (name and email, need and code), the message full width and growing to the card's foot on a desktop, errors under each field in Spanish, one status line, sent through Netlify Forms. The form card sizes to its content. On tablet and phone the order is words, form, then the photograph taking the spare height.
 
 ## Do's and Don'ts
 
