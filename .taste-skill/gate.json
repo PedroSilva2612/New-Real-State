@@ -1,34 +1,25 @@
 {
- "start": "2026-11-17T12:08:54.539Z",
- "round": 1,
+ "start": "2026-11-18T10:32:10.659Z",
+ "round": 2,
  "idle": 0,
  "errors": 0,
- "status": "pass",
+ "status": "fail",
  "history": [
   {
-   "at": "2026-11-17T12:11:19.035Z",
+   "at": "2026-11-18T10:34:27.818Z",
    "mode": "manual",
    "status": "fail",
-   "fails": 1,
+   "fails": 11,
    "round": 1,
    "reused": false,
    "stopHookActive": false
   },
   {
-   "at": "2026-11-17T12:11:28.669Z",
+   "at": "2026-11-18T10:37:07.506Z",
    "mode": "manual",
    "status": "fail",
-   "fails": 1,
-   "round": 1,
-   "reused": true,
-   "stopHookActive": false
-  },
-  {
-   "at": "2026-11-17T12:14:20.952Z",
-   "mode": "manual",
-   "status": "pass",
-   "fails": 0,
-   "round": 1,
+   "fails": 7,
+   "round": 2,
    "reused": false,
    "stopHookActive": false
   }
@@ -42,18 +33,35 @@
   "category": "inmobiliaria",
   "primary": "Agenda una visita",
   "rounds": 3,
-  "start": "2026-11-17T12:08:54.539Z",
+  "start": "2026-11-18T10:32:10.659Z",
   "by": "gate.mjs --start"
  },
  "manual": true,
- "roundKey": "b1dea4a2352f20da:a708e4bb",
+ "roundKey": "c220fb638d2b77b1:a708e4bb",
  "roundFree": false,
  "idleFree": false,
  "blockKey": null,
- "fp": "7486bbcb7bdd5449",
+ "fp": "c220fb638d2b77b1",
  "page": "dist/index.html",
  "found": {
   "fails": [
+   {
+    "check": "pinned",
+    "where": "section#inicio > div.umbral__stage \"9,40 m 6,60 m Inmobiliaria para comprar,\"",
+    "msg": "held on screen for 1 screen of scroll (position: sticky) while the page moves on",
+    "fix": "let the section scroll with the page",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency",
+    "ids": [
+     "pinned"
+    ],
+    "wheres": [
+     "section#inicio > div.umbral__stage \"9,40 m 6,60 m Inmobiliaria para comprar,\""
+    ]
+   },
    {
     "check": "copy-headings",
     "where": "h2#nosotros-h \"Sobre nosotros\"",
@@ -69,6 +77,103 @@
     "wheres": [
      "h2#nosotros-h \"Sobre nosotros\""
     ]
+   },
+   {
+    "check": "empty-area",
+    "where": "section#inicio \"Inmobiliaria para comprar, vender o alqu\"",
+    "msg": "52% of the section is empty: 944px above its first content, in its 1800px of rows (WARN over 35%, FAIL over 50%)",
+    "fix": "fill the section: a picture or a second column beside the words, or more of its own content; the section stays one or two screens tall (T-height)",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "empty-area"
+    ],
+    "wheres": [
+     "section#inicio \"Inmobiliaria para comprar, vender o alqu\""
+    ]
+   },
+   {
+    "check": "hero-enter",
+    "where": "section#inicio",
+    "msg": "the hero does not enter on load: no data-enter on the hero (motion.md, The hero's entrance)",
+    "fix": "put data-enter on the hero <section> and keep the head line from starter.html that sets html.m-enter",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "hero-enter"
+    ],
+    "wheres": [
+     "section#inicio"
+    ]
+   },
+   {
+    "check": "hero-screen",
+    "where": "section#inicio \"9,40 m 6,60 m Inmobiliaria para comprar,\"",
+    "msg": "the hero ends at 1800px on a 900px screen, 900px below the fold: it ends at the fold, 1px either way (SR-1)",
+    "fix": "make the hero exactly one screen (height: 100svh, its content fitted inside), never taller or shorter",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "hero-screen"
+    ],
+    "wheres": [
+     "section#inicio \"9,40 m 6,60 m Inmobiliaria para comprar,\""
+    ]
+   },
+   {
+    "check": "container-edges",
+    "where": "section#inicio \"9,40 m 6,60 m Inmobiliaria para comprar,\"",
+    "msg": "the section needs exactly one in-flow child .wrap (it has 1 in-flow child, 0 .wrap) (SR-6)",
+    "fix": "build the page as header.nav, a main of sections (each one in-flow .wrap plus background layers) and footer.closing",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "container-edges"
+    ],
+    "wheres": [
+     "section#inicio \"9,40 m 6,60 m Inmobiliaria para comprar,\""
+    ]
+   },
+   {
+    "check": "container-edges",
+    "where": "section#inicio > div.umbral__stage > div.wrap.umbral__copy \"Inmobiliaria para comprar, vender o alqu\"",
+    "msg": "the hero's .wrap holds 2 children, 0 of them .hero-text: one .hero-text and at most one strip (SR-6)",
+    "fix": "build the page as header.nav, a main of sections (each one in-flow .wrap plus background layers) and footer.closing",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "container-edges"
+    ],
+    "wheres": [
+     "section#inicio > div.umbral__stage > div.wrap.umbral__copy \"Inmobiliaria para comprar, vender o alqu\""
+    ]
+   },
+   {
+    "check": "hero-fold",
+    "where": "#inicio section.hero.umbral \"9,40 m 6,60 m Inmobiliaria para \"",
+    "msg": "ends at y 1800, past the fold (900): 2.00 screens tall",
+    "fix": "the hero fills the first screen alone, its button inside it",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "layout",
+    "ids": [
+     "hero-fold"
+    ],
+    "wheres": [
+     "#inicio section.hero.umbral \"9,40 m 6,60 m Inmobiliaria para \""
+    ]
    }
   ],
   "warns": [
@@ -76,6 +181,17 @@
     "check": "scroll-reveal",
     "where": "section#nosotros > div.wrap > p.mo-wh__text \"New Real State nació para que comprar o \"",
     "msg": "starts \"color\" (0.2 s) the moment it is scrolled into view (an IntersectionObserver) on span.mo-w:nth-of-type(1) (inside a dealt moment's section, [data-moment]: an enter moment is expected on every kind; its still is judged under reduced motion)",
+    "fix": "show it at rest: no fade, rise or unmask when it is scrolled into view",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "scroll-reveal",
+    "where": "section#recorrido \"El recorrido de compra en 5 pasos Cada e\"",
+    "msg": "starts \"opacity\" (0.4 s) the moment it is scrolled into view (an IntersectionObserver) on div.mo-ph__words (inside a dealt moment's section, [data-moment]: an enter moment is expected on every kind; its still is judged under reduced motion)",
     "fix": "show it at rest: no fade, rise or unmask when it is scrolled into view",
     "widths": [
      1440,
@@ -112,6 +228,27 @@
     "fix": "label buttons with a verb and what the visitor gets (\"Book a room\", \"Start free trial\")",
     "widths": [
      1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "busy-ground",
+    "where": "h1#hero-h > span.umbral__line:nth-of-type(1) > span \"Inmobiliaria para\"",
+    "msg": "text over a detailed part of a picture (its ground changes by 2.0 L* from one pixel to the next under the words) (inside a held section or scroll scene, whose motion --quick does not check)",
+    "fix": "move the text to a calm part of the picture, or put it on a panel",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "section-gaps",
+    "where": "section#inicio / section#recorrido",
+    "msg": "98px between these sections, -47% against the median 186px",
+    "fix": "use one gap between sections (all within 25% of each other)",
+    "widths": [
+     1440,
+     390
     ],
     "from": "consistency"
    },
@@ -166,16 +303,6 @@
     "from": "consistency"
    },
    {
-    "check": "orphan",
-    "where": "div.hero__text.span-5 > dl.hero-facts > div:nth-of-type(2) > dd \"31 de diciembre de 2026\"",
-    "msg": "its last line holds only \"2026\"",
-    "fix": "rebalance the text (text-wrap: pretty, or a shorter line) so the last line holds more than one short word",
-    "widths": [
-     1440
-    ],
-    "from": "consistency"
-   },
-   {
     "check": "nav-current",
     "where": "header.nav.nav--centre",
     "msg": "the nav stays on screen with 5 links to the page's sections, but never marks the one you are in (no link changes as the page scrolls)",
@@ -186,10 +313,30 @@
     "from": "consistency"
    },
    {
-    "check": "action-repeat",
-    "where": "header.nav.nav--centre > div.wrap.nav__bar > div.nav__actions > a.btn.btn--primary \"agenda una visita\"",
-    "msg": "\"agenda una visita\" shows 2 times on the first screen at 1440px (nav, hero): the nav's button and the hero's; nothing else on the screen may repeat it",
-    "fix": "show the action once a screen besides the nav's button: the hero's, the close's or the phone bar's, never all at once",
+    "check": "visual-caption",
+    "where": "div.umbral__foot.grid > dl.umbral__facts.span-6 > div:nth-of-type(1) > dt \"Oferta de venta\"",
+    "msg": "a small 14px line is laid over the lower half of the picture casa-piscina-1800.webp: \"Oferta de venta\"; no caption or description under any image, render or visual (house rule)",
+    "fix": "take the line away: no caption or description under, over or on any image, render or visual; a licence credit goes in one footer line",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "container-edges",
+    "where": "section#inicio > div.umbral__stage > div.umbral__shade",
+    "msg": "a box runs 0-1440px, outside the container lines of section 1 at 80-1360px: full width is for background layers and grounds only (it sits in a part held on screen as the page scrolls: told as a WARN) (SR-6)",
+    "fix": "keep it inside the container lines (.wrap): full width is for background layers and grounds only",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "split-pair",
+    "where": "section#inicio > div.umbral__stage > div.wrap.umbral__copy > div.umbral__foot.grid \"Un mismo asesor te acompaña de la primer\"",
+    "msg": "the two columns of the split start 89px apart at the top: a split's columns are top-aligned, 8px either way (it sits in a part held on screen as the page scrolls: told as a WARN) (SR-8)",
+    "fix": "top-align both columns of the split (align-items: start)",
     "widths": [
      1440
     ],
@@ -226,10 +373,20 @@
     "from": "consistency"
    },
    {
-    "check": "section-gaps",
-    "where": "main#top > section.hero.hero--split / section#recorrido",
-    "msg": "108px between these sections, -47% against the median 204px",
-    "fix": "use one gap between sections (all within 25% of each other)",
+    "check": "off-grid",
+    "where": "section#inicio > div.umbral__stage > p.umbral__pasa \"Pasa, empieza el recorrido\"",
+    "msg": "left edge at 33.5px, 9.5px off the page margin at 24px (43 elements, none of them near it) (inside a held section or scroll scene, whose motion --quick does not check)",
+    "fix": "move it onto the page margin, or the column edge its section uses",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "photo-set",
+    "where": "section#inicio > div.umbral__stage > div.umbral__media > img.umbral__img \"casa-piscina-1800.webp\"",
+    "msg": "2 photographs in more than one look: lightness from 0.34 to 0.72; the odd one out is casa-piscina-1800.webp",
+    "fix": "grade the photographs to one look (light, colour, warmth), or replace the odd one out",
     "widths": [
      390
     ],
@@ -238,11 +395,126 @@
   ],
   "crashed": [],
   "seconds": {
-   "consistency": 125,
-   "layout": 4
+   "consistency": 132,
+   "layout": 3
   }
  },
- "open": [],
+ "open": [
+  {
+   "check": "pinned",
+   "where": "section#inicio > div.umbral__stage \"9,40 m 6,60 m Inmobiliaria para comprar,\"",
+   "msg": "held on screen for 1 screen of scroll (position: sticky) while the page moves on",
+   "fix": "let the section scroll with the page",
+   "widths": [
+    1440,
+    390
+   ],
+   "from": "consistency",
+   "ids": [
+    "pinned"
+   ],
+   "wheres": [
+    "section#inicio > div.umbral__stage \"9,40 m 6,60 m Inmobiliaria para comprar,\""
+   ]
+  },
+  {
+   "check": "empty-area",
+   "where": "section#inicio \"Inmobiliaria para comprar, vender o alqu\"",
+   "msg": "52% of the section is empty: 944px above its first content, in its 1800px of rows (WARN over 35%, FAIL over 50%)",
+   "fix": "fill the section: a picture or a second column beside the words, or more of its own content; the section stays one or two screens tall (T-height)",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "empty-area"
+   ],
+   "wheres": [
+    "section#inicio \"Inmobiliaria para comprar, vender o alqu\""
+   ]
+  },
+  {
+   "check": "hero-enter",
+   "where": "section#inicio",
+   "msg": "the hero does not enter on load: no data-enter on the hero (motion.md, The hero's entrance)",
+   "fix": "put data-enter on the hero <section> and keep the head line from starter.html that sets html.m-enter",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "hero-enter"
+   ],
+   "wheres": [
+    "section#inicio"
+   ]
+  },
+  {
+   "check": "hero-screen",
+   "where": "section#inicio \"9,40 m 6,60 m Inmobiliaria para comprar,\"",
+   "msg": "the hero ends at 1800px on a 900px screen, 900px below the fold: it ends at the fold, 1px either way (SR-1)",
+   "fix": "make the hero exactly one screen (height: 100svh, its content fitted inside), never taller or shorter",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "hero-screen"
+   ],
+   "wheres": [
+    "section#inicio \"9,40 m 6,60 m Inmobiliaria para comprar,\""
+   ]
+  },
+  {
+   "check": "container-edges",
+   "where": "section#inicio \"9,40 m 6,60 m Inmobiliaria para comprar,\"",
+   "msg": "the section needs exactly one in-flow child .wrap (it has 1 in-flow child, 0 .wrap) (SR-6)",
+   "fix": "build the page as header.nav, a main of sections (each one in-flow .wrap plus background layers) and footer.closing",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "container-edges"
+   ],
+   "wheres": [
+    "section#inicio \"9,40 m 6,60 m Inmobiliaria para comprar,\""
+   ]
+  },
+  {
+   "check": "container-edges",
+   "where": "section#inicio > div.umbral__stage > div.wrap.umbral__copy \"Inmobiliaria para comprar, vender o alqu\"",
+   "msg": "the hero's .wrap holds 2 children, 0 of them .hero-text: one .hero-text and at most one strip (SR-6)",
+   "fix": "build the page as header.nav, a main of sections (each one in-flow .wrap plus background layers) and footer.closing",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "container-edges"
+   ],
+   "wheres": [
+    "section#inicio > div.umbral__stage > div.wrap.umbral__copy \"Inmobiliaria para comprar, vender o alqu\""
+   ]
+  },
+  {
+   "check": "hero-fold",
+   "where": "#inicio section.hero.umbral \"9,40 m 6,60 m Inmobiliaria para \"",
+   "msg": "ends at y 1800, past the fold (900): 2.00 screens tall",
+   "fix": "the hero fills the first screen alone, its button inside it",
+   "widths": [
+    1440,
+    390
+   ],
+   "from": "layout",
+   "ids": [
+    "hero-fold"
+   ],
+   "wheres": [
+    "#inicio section.hero.umbral \"9,40 m 6,60 m Inmobiliaria para \""
+   ]
+  }
+ ],
  "waived": [
   {
    "check": "copy-headings",
@@ -262,6 +534,6 @@
    "reason": "The page is in Spanish (the brief's language); the check's section-noun list is English only. 'Sobre nosotros' is 'About us', and the other flagged headings name the method's parts ('Un solo asesor', 'Honorarios por escrito')."
   }
  ],
- "warnCount": 16,
- "at": "2026-11-17T12:14:20.952Z"
+ "warnCount": 21,
+ "at": "2026-11-18T10:37:07.506Z"
 }
