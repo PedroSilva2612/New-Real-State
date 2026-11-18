@@ -10,6 +10,8 @@ colors:
   stone-on-dark: "#dfdedb"
   stone-muted-on-dark: "#9e9d99"
   logo-cobalt: "#0069ff"
+  hero-shade: "rgb(16 15 12 / .84)"
+  hero-white: "#ffffff"
   on-cobalt: "#ffffff"
 typography:
   display:
@@ -23,6 +25,17 @@ typography:
     fontSize: "clamp(30px, 1.72vw + 23.3px, 48px)"
     fontWeight: 400
     letterSpacing: "-0.025em"
+  hero-display:
+    fontFamily: "Red Hat Display, system-ui, sans-serif"
+    fontSize: "clamp(42px, 4.6vw + 14px, 92px)"
+    fontWeight: 400
+    lineHeight: 1
+    letterSpacing: "-0.04em"
+  hero-pasa:
+    fontFamily: "Red Hat Display, system-ui, sans-serif"
+    fontSize: "clamp(30px, 3.4vw + 12px, 64px)"
+    fontWeight: 400
+    letterSpacing: "-0.03em"
   statement:
     fontFamily: "Red Hat Display, system-ui, sans-serif"
     fontSize: "clamp(32px, 3.4vw + 14px, 64px)"
@@ -102,6 +115,8 @@ Restrained: stone and graphite neutrals with one accent taken from the logo.
 - **Graphite Muted** (#57564f): the grey second half of a heading and labels only, never body text.
 - **Stone on Dark** (#dfdedb) and **Stone Muted on Dark** (#9e9d99): text on the dark band; body text on dark stays in Stone on Dark (7:1).
 
+- **Hero Shade** (graphite at 84% falling to 0 over the lower 72% of the hero): the only gradient on the page, under the hero's white words, over the pool and never over the house's upper floor.
+
 ### Named Rules
 **The Logo Owns the Blue.** Cobalt appears only where it marks an action, focus or where you are; it never fills a section.
 
@@ -113,7 +128,8 @@ Restrained: stone and graphite neutrals with one accent taken from the logo.
 Headlines carry size and tight tracking, never weight. Sentence case everywhere; no all-caps labels.
 
 ### Hierarchy
-- **Display** (400, 72px at 1440 down to 38px, 1.02): the hero h1 only, at most three lines.
+- **Hero Display** (400, 92px down to 42px, 1.0, -0.04em, white): the hero h1 only, two lines on a desktop, set on the photograph over the hero shade.
+- **Hero Pasa** (400, 64px down to 30px): the one line the hero's walk-through leaves on the stone.
 - **Statement** (400, 64px down to 32px, 1.12): the Sobre nosotros statement only, one clear step above its h2.
 - **Code** (400, 48px down to 32px, tracking +0.06em): the discount code only.
 - **Headline** (400, 48px down to 30px): section h2. A heading may end in a grey second sentence (`.muted`) after a full stop.
@@ -134,6 +150,8 @@ Flat. No shadows. Depth comes from photographs and from the one dark band. The t
 Soft radius: 20px on photographs and the form card, 12px on panels, 8px on buttons and fields. Photographs are always cropped by `object-fit: cover`. On a phone, tall frames load a portrait crop made for them (art direction with `<picture>`), never a landscape file cropped away.
 
 ## Components
+
+- **Threshold hero ("del plano a la casa"):** a full-bleed photograph of the house under the fixed bar, with an SVG elevation of the same house traced on the photograph's own coordinates (viewBox 1000 x 667, slice, so every line sits on the edge it draws). On load the elevation draws itself in graphite (dimensions in cobalt), the photograph develops under it from the ground up while the lines turn white and let go, then the shade, the headline out of its masks, the lead, the buttons and the offer facts. The hero is two screens with a sticky stage: scrolling walks the camera through the open ground floor (scale to 3.6 on that point), the headline parts like two doors, "Pasa, empieza el recorrido" arrives and the stage fades to stone so the tour's heading follows. Any wheel, key, touch or click finishes the intro at once; under reduced motion the hero is one still screen.
 
 - **Buttons:** one primary (cobalt, 44px, arrow glyph) per view and one secondary look (text with an underline and arrow). They step on hover and press on click.
 - **Tour panel:** chapter count, a 168px floor plan (walls in 2.4px graphite with door openings, the terrace's open edge dashed, visited rooms shaded, the room in hand in cobalt, and the dotted cobalt route from the front door that only ever passes through openings), the chapter title and two lines. On a phone the panel is compact: the plan (84px) sits beside the count at the panel's top right.

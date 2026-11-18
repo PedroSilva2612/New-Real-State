@@ -1,0 +1,103 @@
+/* The threshold hero ("del plano a la casa").
+   The elevation of the house is drawn over the stone ground, the photograph develops under the drawing,
+   the headline rises, and one extra screen of scroll walks through the open ground floor into the tour.
+   The SVG shares the photograph's coordinates (viewBox 1000 x 667, slice = object-fit: cover), so every
+   line sits on the edge it traces. Motion: public/umbral.js. Reduced motion: the finished hero, no pin. */
+
+main > section.hero.umbral {
+  height: 200vh; height: 200svh;
+  padding: 0;
+  display: block;
+  background: var(--bg);
+}
+.umbral__stage {
+  position: sticky; top: 0;
+  height: 100vh; height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* the photograph and its drawing: one box, one cover crop */
+.umbral__media {
+  position: absolute; inset: var(--nav) 0 0 0;
+  transform-origin: var(--umbral-ox, 38.5%) var(--umbral-oy, 56%);
+  will-change: transform;
+}
+.umbral__img, .umbral__plan {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+}
+.umbral__img { object-fit: cover; object-position: 50% 50%; max-width: none; }
+.umbral__plan { overflow: visible; pointer-events: none; }
+.umbral__g path {
+  fill: none; stroke: var(--ink); stroke-width: 1.5; vector-effect: non-scaling-stroke;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.umbral__g--dim path { stroke: var(--accent); }
+.umbral__g--dim text { fill: var(--accent); font: 500 12px/1 var(--font-text); letter-spacing: .02em; paint-order: stroke; stroke: var(--bg); stroke-width: 4px; }
+
+/* the shade under the words: a deep, low gradient over the pool, never over the house */
+.umbral__shade {
+  position: absolute; inset: var(--nav) 0 0 0; pointer-events: none;
+  background: linear-gradient(to top, rgb(16 15 12 / .84) 0%, rgb(16 15 12 / .62) 34%, rgb(16 15 12 / .22) 56%, rgb(16 15 12 / 0) 72%);
+}
+
+/* the words: bottom of the screen, on the wrap's lines */
+.umbral__copy {
+  position: absolute; left: 0; right: 0; bottom: 0; margin-inline: auto;
+  padding-bottom: clamp(32px, 6vh, 64px);
+  display: grid; gap: var(--s-6);
+  color: #fff;
+  z-index: 2;
+}
+.umbral__copy h1 {
+  margin: 0; color: #fff;
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(42px, 4.6vw + 14px, 92px); line-height: 1;
+  letter-spacing: -0.04em; max-width: 17ch; text-wrap: balance;
+}
+.umbral__line { display: block; overflow: hidden; padding-bottom: .08em; margin-bottom: -.08em; }
+.umbral__line > span { display: inline-block; will-change: transform; }
+.umbral__foot { align-items: end; row-gap: var(--s-6); }
+.umbral__lead { display: grid; gap: var(--s-5); }
+.umbral__lead p { margin: 0; font-size: clamp(17px, .4vw + 15px, 20px); line-height: 1.5; max-width: 44ch; color: rgb(255 255 255 / .92); }
+.umbral .umbral__secondary { color: #fff; }
+.umbral__facts {
+  margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-5);
+  padding-top: var(--s-4); border-top: 1px solid rgb(255 255 255 / .28);
+}
+.umbral__facts > div { display: grid; gap: var(--s-1); align-content: start; }
+.umbral__facts dt { font-size: var(--t-small); color: rgb(255 255 255 / .74); }
+.umbral__facts dd { margin: 0; font-weight: 500; color: #fff; }
+@media (max-width: 1023px) { .umbral__facts { display: none; } }
+@media (max-width: 639px) {
+  .umbral__copy { padding-bottom: calc(24px + env(safe-area-inset-bottom)); gap: var(--s-5); }
+  .umbral__copy .btn-row { flex-direction: column; align-items: stretch; }
+  .umbral__shade { background: linear-gradient(to top, rgb(16 15 12 / .84) 0%, rgb(16 15 12 / .58) 38%, rgb(16 15 12 / 0) 72%); }
+}
+
+/* the walk through the door: a line in the middle of the room, then the stone of the tour */
+.umbral__pasa {
+  position: absolute; left: 50%; top: 60%; z-index: 3; margin: 0;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(30px, 3.4vw + 12px, 64px); letter-spacing: -0.03em; white-space: nowrap;
+  color: var(--ink); opacity: 0; pointer-events: none;
+}
+.umbral__fade { position: absolute; inset: 0; z-index: 2; background: var(--bg); opacity: 0; pointer-events: none; }
+
+/* the intro's first frame, set before paint by the head script; umbral-done (the script, or a 4.2s guard)
+   always shows the finished hero */
+html.umbral-intro:not(.umbral-done) .umbral__img { clip-path: inset(100% 0 0 0); }
+html.umbral-intro:not(.umbral-done) .umbral__g path { stroke-dasharray: 1; stroke-dashoffset: 1; }
+html.umbral-intro:not(.umbral-done) .umbral__g--dim text { opacity: 0; }
+html.umbral-intro:not(.umbral-done) .umbral__shade { opacity: 0; }
+html.umbral-intro:not(.umbral-done) .umbral__line > span { transform: translateY(105%); }
+html.umbral-intro:not(.umbral-done) :is(.umbral__lead, .umbral__facts) { opacity: 0; }
+/* the finished state: the drawing has handed over to the photograph */
+html:not(.umbral-intro) .umbral__plan, html.umbral-done .umbral__plan { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  main > section.hero.umbral { height: 100vh; height: 100svh; }
+  .umbral__stage { position: relative; }
+  .umbral__plan { opacity: 0; }
+}

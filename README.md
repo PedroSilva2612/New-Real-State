@@ -4,7 +4,7 @@ Web de una sola página para una inmobiliaria (proyecto de portfolio de Pedro Si
 
 ## Qué incluye
 
-- **Hero** dividido con la casa de cristal frente al mar y la oferta vigente.
+- **Hero "del plano a la casa"**: el alzado de la casa se dibuja como un plano, la foto real aparece bajo las líneas y, al hacer scroll, la cámara entra por la puerta abierta hasta el recorrido (`public/umbral.css`, `public/umbral.js`).
 - **Recorrido**: un paseo por cinco estancias (recibidor, salón, cocina, dormitorio y terraza) que explica los cinco pasos de la compra de una casa. Cada foto se descubre al hacer scroll y un pequeño plano marca en qué estancia estás.
 - **Sobre nosotros**: una frase que se ilumina palabra a palabra, y la forma de trabajar.
 - **Servicios**: comprar, alquilar, vender y conocer barrios; la foto cambia con la fila.

@@ -11,7 +11,7 @@ const tour = [
   { n: '05', room: 'La terraza', title: 'La terraza: las llaves', text: 'Te acompañamos en la notaría y en la entrega de llaves, y seguimos a un mensaje después.', photo: img('photo-f166350776', 'Azotea de una casa blanca con tumbonas y vistas a las montañas al atardecer') },
 ];
 const services = [
-  { key: 'comprar', name: 'Comprar una casa', text: 'Búsqueda a medida, visitas filtradas y compañía hasta la notaría.', photo: img('casa-piscina', 'Casa blanca de dos plantas con piscina y porche de madera'), own: true },
+  { key: 'comprar', name: 'Comprar una casa', text: 'Búsqueda a medida, visitas filtradas y compañía hasta la notaría.', photo: img('casa-mar', 'Casa de cristal curvo con terraza de césped frente al mar'), own: true },
   { key: 'alquilar', name: 'Alquilar un piso', text: 'Pisos y casas revisados en persona, con contrato y fianza explicados.', photo: img('edificio', 'Edificio de viviendas con fachada blanca y negra bajo un cielo claro'), own: true },
   { key: 'vender', name: 'Vender tu vivienda', text: 'Tasación, fotos y planos profesionales. Ahora a mitad de honorarios.', photo: img('photo-f192968130', 'Cocina moderna con panel de listones de madera y encimera blanca') },
   { key: 'barrios', name: 'Conocer los barrios', text: 'Colegios, transporte y precios de cada zona antes de que elijas.', photo: img('photo-f146442614', 'Vista aérea de una urbanización de casas blancas con el mar al fondo') },
@@ -39,7 +39,7 @@ const plan = (k) => {
 };
 // one photograph: srcset by width, width/height to hold its box, and on a phone (under 640px) a portrait crop
 // made for the tall frames there (art direction), so the phone never loads a landscape file it would crop away
-const D = {"casa-mar": [1800, 1200], "casa-piscina": [1800, 1200], "casa-madera": [1800, 1200], "edificio": [1800, 1200], "photo-f129862986": [1600, 1308], "photo-f104865570": [1600, 1067], "photo-f186239762": [1600, 1068], "photo-f180516447": [1600, 1067], "photo-f166350776": [1600, 1068], "photo-f192968130": [1600, 1068], "photo-f122681355": [1600, 1067], "photo-f146442614": [1600, 1200], "photo-f51439611": [1600, 1067], "photo-f192968130-m": [437, 1068], "photo-f186239762-m": [478, 748], "photo-f129862986-m": [519, 811], "photo-f122681355-m": [345, 961], "casa-madera-m": [700, 2121], "edificio-m": [491, 1200], "photo-f166350776-m": [683, 1068], "casa-piscina-m": [491, 1200], "photo-f146442614-m": [491, 1200], "photo-f180516447-m": [682, 1067], "photo-f104865570-m": [546, 854], "photo-f51439611-m": [586, 1067]};
+const D = {"casa-mar": [1800, 1200], "casa-piscina": [1800, 1200], "casa-madera": [1800, 1200], "edificio": [1800, 1200], "photo-f129862986": [1600, 1308], "photo-f104865570": [1600, 1067], "photo-f186239762": [1600, 1068], "photo-f180516447": [1600, 1067], "photo-f166350776": [1600, 1068], "photo-f192968130": [1600, 1068], "photo-f122681355": [1600, 1067], "photo-f146442614": [1600, 1200], "photo-f51439611": [1600, 1067], "photo-f192968130-m": [437, 1068], "photo-f186239762-m": [478, 748], "photo-f129862986-m": [519, 811], "photo-f122681355-m": [345, 961], "casa-madera-m": [700, 2121], "edificio-m": [491, 1200], "photo-f166350776-m": [683, 1068], "casa-piscina-m": [491, 1200], "photo-f146442614-m": [491, 1200], "photo-f180516447-m": [682, 1067], "photo-f104865570-m": [546, 854], "photo-f51439611-m": [586, 1067], "casa-mar-m": [491, 1200]};
 const photo = ({ stem, own = false, alt, sizes, cls = 'frame__img', lazy = true, style = '', attrs = '' }) => {
   const set = own
     ? `/assets/img/${stem}-600.webp 600w, /assets/img/${stem}-1000.webp 1000w, /assets/img/${stem}-1800.webp 1800w`
@@ -97,6 +97,8 @@ const pic = (p, sizes, eager = false, own = false) => {
 }
 </style>
 <link rel="stylesheet" href="/site.css">
+<link rel="stylesheet" href="/umbral.css">
+<script is:inline>if(!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('umbral-intro');setTimeout(()=>document.documentElement.classList.add('umbral-done'),4200)}</script>
 <script is:inline>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
 <script is:inline>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
 <link rel="modulepreload" href="/assets/moments/moments.js">
@@ -130,25 +132,64 @@ const pic = (p, sizes, eager = false, own = false) => {
 </header>
 
 <main id="top">
-  <section class="hero hero--split" data-enter aria-labelledby="hero-h">
-    <div class="wrap"><div class="hero-text grid hero__grid">
-      <div class="hero__text span-5">
-        <h1 id="hero-h">Inmobiliaria para comprar, vender o alquilar</h1>
-        <p class="hero__lead">Un mismo asesor te acompaña de la primera visita a la entrega de llaves: busca contigo, negocia y revisa cada papel.</p>
-        <div class="btn-row">
-          <a class="btn btn--primary" href="#contacto">Agenda una visita<Fragment set:html={arrow} /></a>
-          <a class="btn btn--secondary" href="#recorrido">Ver el recorrido</a>
+  <!-- the threshold: the elevation of the house is drawn, the photograph develops under the drawing,
+       and scrolling walks through the open ground floor into the tour (public/umbral.js, public/umbral.css) -->
+  <section class="hero umbral" id="inicio" aria-labelledby="hero-h" data-umbral>
+    <div class="umbral__stage">
+      <div class="umbral__media" data-umbral-media>
+        <img class="umbral__img" srcset="/assets/img/casa-piscina-600.webp 600w, /assets/img/casa-piscina-1000.webp 1000w, /assets/img/casa-piscina-1800.webp 1800w" sizes="(max-width: 1023px) 330vw, 100vw" src="/assets/img/casa-piscina-1800.webp" width="1800" height="1200" alt="Casa blanca de dos plantas con la planta baja abierta al jardín y una piscina delante" fetchpriority="high" data-source="client" data-subject="house">
+        <svg class="umbral__plan" viewBox="0 0 1000 667" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <g class="umbral__g" data-step="0">
+            <path pathLength="1" d="M0 445H1000"/><path pathLength="1" d="M0 460H760L1000 610"/>
+            <path pathLength="1" d="M450 600L470 470M520 610L500 470M575 600L535 470M640 580L575 470"/>
+          </g>
+          <g class="umbral__g" data-step="1">
+            <path pathLength="1" d="M50 22H700V82H50Z"/><path pathLength="1" d="M160 82V162H645V82"/>
+            <path pathLength="1" d="M118 82V240M165 82V240"/><path pathLength="1" d="M50 240H640V278H50Z"/>
+            <path pathLength="1" d="M118 278V440H165V278"/><path pathLength="1" d="M165 278V305H620V278"/>
+            <path pathLength="1" d="M612 305V440M625 305V440"/><path pathLength="1" d="M722 45H826V450H722Z"/>
+            <path pathLength="1" d="M640 160H722M640 200H722"/><path pathLength="1" d="M826 195L1000 85M826 230H1000"/>
+          </g>
+          <g class="umbral__g" data-step="2">
+            <path pathLength="1" d="M250 168H443V240H250Z"/><path pathLength="1" d="M297 168V240M348 168V240M398 168V240"/>
+            <path pathLength="1" d="M500 168H610V240H500Z"/><path pathLength="1" d="M553 168V240"/>
+            <path pathLength="1" d="M148 190H640"/><path pathLength="1" d="M218 312H595V430H218Z"/>
+            <path pathLength="1" d="M305 312V430M468 312V430M532 312V430"/><path pathLength="1" d="M960 105H1000V135H960Z"/>
+          </g>
+          <g class="umbral__g" data-step="3">
+            <path pathLength="1" d="M760 445H840V425H860V405H880V385H900V365H920V345H940V325H960V305H980V285H1000"/>
+            <path pathLength="1" d="M838 440V282H1000M838 320H1000M838 360H1000M838 400H940"/>
+            <path pathLength="1" d="M0 380H118M0 395H118M0 410H118M0 425H118"/><path pathLength="1" d="M665 370H720V445H665Z"/>
+          </g>
+          <g class="umbral__g umbral__g--dim" data-step="4">
+            <path pathLength="1" d="M218 453H595M218 448V458M595 448V458"/>
+            <path pathLength="1" d="M30 82V440M24 82H36M24 440H36"/>
+            <text x="406" y="452" text-anchor="middle">9,40 m</text>
+            <text x="38" y="266">6,60 m</text>
+          </g>
+        </svg>
+      </div>
+      <div class="umbral__shade" aria-hidden="true"></div>
+      <div class="wrap umbral__copy">
+        <h1 id="hero-h"><span class="umbral__line"><span>Inmobiliaria para</span></span> <span class="umbral__line"><span>comprar, vender o alquilar</span></span></h1>
+        <div class="umbral__foot grid">
+          <div class="umbral__lead span-5">
+            <p>Un mismo asesor te acompaña de la primera visita a la entrega de llaves: busca contigo, negocia y revisa cada papel.</p>
+            <div class="btn-row">
+              <a class="btn btn--primary" href="#contacto">Agenda una visita<Fragment set:html={arrow} /></a>
+              <a class="btn btn--secondary umbral__secondary" href="#recorrido">Ver el recorrido</a>
+            </div>
+          </div>
+          <dl class="umbral__facts span-6 start-7">
+            <div><dt>Oferta de venta</dt><dd>50&nbsp;% menos en honorarios</dd></div>
+            <div><dt>Hasta</dt><dd>31 de diciembre de 2026</dd></div>
+            <div><dt>Código</dt><dd>LLAVES50</dd></div>
+          </dl>
         </div>
-        <dl class="hero-facts">
-          <div><dt>Oferta de venta</dt><dd>50&nbsp;% menos en honorarios</dd></div>
-          <div><dt>Hasta</dt><dd>31 de diciembre de 2026</dd></div>
-          <div><dt>Código</dt><dd>LLAVES50</dd></div>
-        </dl>
       </div>
-      <div class="hero__media span-6 start-7">
-        <Fragment set:html={photo({ stem: 'casa-mar', own: true, alt: 'Casa de cristal curvo con terraza de césped frente al mar', sizes: '(min-width: 1024px) 76vw, 100vw', cls: '', lazy: false, style: '--ly-pos: 38% 50%', attrs: 'fetchpriority="high" data-source="client" data-subject="house"' })} />
-      </div>
-    </div></div>
+      <p class="umbral__pasa" aria-hidden="true">Pasa, empieza el recorrido</p>
+      <div class="umbral__fade" aria-hidden="true"></div>
+    </div>
   </section>
 
   <section class="section" id="recorrido" data-moment="photo-chapters" aria-labelledby="recorrido-h">
@@ -319,5 +360,6 @@ const pic = (p, sizes, eager = false, own = false) => {
 <script type="module" src="/assets/motion/motion.js" is:inline></script>
 <script type="module" src="/assets/layout/layout.js" is:inline></script>
 <script type="module" src="/site.js" is:inline></script>
+<script type="module" src="/umbral.js" is:inline></script>
 </body>
 </html>
